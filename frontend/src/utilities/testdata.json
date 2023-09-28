@@ -1,16 +1,16 @@
 [
   {
-    "background_image": "https://claid.ai/static/Platforms-1f8f85041d0e44b909b15a32568dd159.jpg",
+    "background_image": "https://claid.ai/static/Freeform-e11d0b5c04bc6c5cd6ad5d599233c78e.jpg",
     "title": "FreeForm",
     "item_length": "0"
   },
   {
-    "background_image": "https://claid.ai/static/Platforms-1f8f85041d0e44b909b15a32568dd159.jpg",
+    "background_image": "data:image/jpeg;base64,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",
     "title": "My compositions",
     "item_length": "0"
   },
   {
-    "background_image": "https://claid.ai/static/Platforms-1f8f85041d0e44b909b15a32568dd159.jpg",
+    "background_image": "https://claid.ai/static/Minimal-c90092b0e3c2126bac95207e2dde11e1.jpg",
     "title": "Minimal",
     "item_length": "10"
   },
@@ -20,42 +20,42 @@
     "item_length": "13"
   },
   {
-    "background_image": "https://claid.ai/static/Platforms-1f8f85041d0e44b909b15a32568dd159.jpg",
+    "background_image": "https://claid.ai/static/SPA-b5ebaa069c0e4984539ba3d6a1b03f77.jpg",
     "title": "SPA",
     "item_length": "6"
   },
   {
-    "background_image": "https://claid.ai/static/Platforms-1f8f85041d0e44b909b15a32568dd159.jpg",
+    "background_image": "https://claid.ai/static/Nature-2b1bcbcdbdb65aaea3b74b66f9daa5de.jpg",
     "title": "Fabric",
     "item_length": "10"
   },
   {
-    "background_image": "https://claid.ai/static/Platforms-1f8f85041d0e44b909b15a32568dd159.jpg",
+    "background_image": "https://claid.ai/static/Stones-c8df00501f7858a5313cbebbfb8ba66b.jpg",
     "title": "Nature",
     "item_length": "16"
   },
   {
-    "background_image": "https://claid.ai/static/Platforms-1f8f85041d0e44b909b15a32568dd159.jpg",
+    "background_image": "https://claid.ai/static/Kitchen-a6c9c8c2d968fe4231c66fc2969e19b1.jpg",
     "title": "Stones",
     "item_length": "10"
   },
   {
-    "background_image": "https://claid.ai/static/Platforms-1f8f85041d0e44b909b15a32568dd159.jpg",
+    "background_image": "https://claid.ai/static/City-9f0786c54091a20c0adbd5bd61fc1578.jpg",
     "title": "Kitchen",
     "item_length": "5"
   },
   {
-    "background_image": "https://claid.ai/static/Platforms-1f8f85041d0e44b909b15a32568dd159.jpg",
+    "background_image": "https://claid.ai/static/Roads-1b91f899fb21be81f911f16044a6d65a.jpg",
     "title": "City",
     "item_length": "5"
   },
   {
-    "background_image": "https://claid.ai/static/Platforms-1f8f85041d0e44b909b15a32568dd159.jpg",
+    "background_image": "https://claid.ai/static/Interiors-cc9aea55425ab1b51c53c973f7cd4db0.jpg",
     "title": "Roads",
     "item_length": "11"
   },
   {
-    "background_image": "https://claid.ai/static/Platforms-1f8f85041d0e44b909b15a32568dd159.jpg",
+    "background_image": "https://claid.ai/static/Walls-eba32cf089efc3e84a06a6be9208fd48.jpg",
     "title": "Interiors",
     "item_length": "8"
   }
