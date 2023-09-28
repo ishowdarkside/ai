@@ -1,0 +1,20 @@
+.folder {
+  height: 16rem;
+  border-radius: 6px;
+  position: relative;
+  img {
+    width: 100%;
+    position: absolute;
+
+    height: 80%;
+  }
+
+  div {
+    position: absolute;
+    font-size: 1.3rem;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
