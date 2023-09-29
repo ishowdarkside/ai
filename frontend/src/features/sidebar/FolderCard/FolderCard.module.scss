@@ -4,10 +4,34 @@
   position: relative;
   transition: .2s;
   cursor: pointer;
+  z-index: 1;
+  
+  .first_box,
+  .second_box {
+    position: absolute;
+    border-radius: 6px;
+    transform: translateX(-50%);
+    left: 50%;
+    z-index: 0;
+    height: 80%;
+  }
+  
+  .first_box {
+    background-color: #EDEEF3;
+    top: -8px;
+    width: 90%;
+  }
+
+  .second_box {
+    background-color: #F3F4F7;
+    top: -14px;
+    width: 80%;
+  }
+
   img {
     width: 100%;
     position: absolute;
-
+    border-radius: 6px;
     height: 80%;
   }
 
@@ -25,5 +49,12 @@
     -webkit-box-shadow: 0px 6px 33px -18px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 6px 33px -18px rgba(0,0,0,0.75);
     box-shadow: 0px 6px 33px -18px rgba(0,0,0,0.75);
+  }
+
+  span{
+    &:last-child {
+      color: #888;
+      font-size: 1rem;
+    }
   }
 }

@@ -18,7 +18,6 @@ export default function CreateFolderPanel({ onClosePanel }) {
           multiple
           className={styles.hideInput}
         />
-
         <button>Create</button>
       </form>
     </div>
