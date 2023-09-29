@@ -10,10 +10,7 @@ export default function CreateFolderPanel({ onClosePanel }) {
 
       <form className={styles.creationPanel}>
         <label htmlFor="folderName">Folder name</label>
-        <input type="text" id="folderName" name="folderName" />
-        <label htmlFor="images" className={styles.labelImages}>
-          Choose images
-        </label>
+        <input type="text" id="folderName" name="folderName" placeholder="Enter folder name..." />
         <input
           type="file"
           name="images"
@@ -22,7 +19,7 @@ export default function CreateFolderPanel({ onClosePanel }) {
           className={styles.hideInput}
         />
 
-        <button>Save</button>
+        <button>Create</button>
       </form>
     </div>
   );
