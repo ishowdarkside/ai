@@ -3,6 +3,8 @@ import styles from "./FolderCard.module.scss";
 export default function FolderCard({ data }) {
   return (
     <div className={styles.folder}>
+      <div className={styles.second_box}></div>
+      <div className={styles.first_box}></div>
       <img src={data.background_image} alt="photo" />
       <div>
         <span>{data.title}</span>
