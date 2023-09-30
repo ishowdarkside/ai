@@ -1,4 +1,5 @@
 .folder {
+    position: relative;
 
     h3 {
         display: flex;
@@ -6,6 +7,7 @@
         cursor: pointer;
         font-family: Montserrat;
         font-weight: 400;
+        width: 50%;
         color: #333;
         font-size: 1.6rem;
 
@@ -23,6 +25,29 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
-        row-gap: 3rem;
+    }
+
+    .hide_input {
+        display: none;
+    }
+
+    .add_image {
+        background-color: #f2f2f2;
+        display: flex;
+        color: #333;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        border-radius: 50%;
+        position: absolute;
+        right: 0;
+        top: -5px;
+        cursor: pointer;
+        transition: .2s;
+
+        &:hover {
+            opacity: .7;
+        }
     }
 }
