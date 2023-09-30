@@ -15,11 +15,11 @@ export default function CreateFolderPanel({ onClosePanel }) {
   function handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("photos", []);
-    Object.values(files).forEach((file) => formData.get("photos").push(file));
-    console.log(formData.get("photos"));
+    const photoArr = Array.from(files);
+    photoArr.forEach((f) => formData.append("photos", f));
     formData.append("folderName", folderName);
-    //mutate(formData);
+    mutate(formData);
+    onClosePanel(false);
   }
 
   if (isLoading) return <h1>...LOADING...</h1>;
@@ -41,7 +41,7 @@ export default function CreateFolderPanel({ onClosePanel }) {
         />
         <input
           type="file"
-          name="images"
+          name="photos"
           id="images"
           multiple
           className={styles.hideInput}
