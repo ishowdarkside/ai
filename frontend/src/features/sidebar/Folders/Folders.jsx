@@ -1,12 +1,11 @@
 import styles from "./Folders.module.scss";
-import testdata from "../../../utilities/testdata.json";
 import FolderCard from "../FolderCard/FolderCard";
 
-export default function Folders() {
+export default function Folders({ setIsOpenFolder, testdata }) {
   return (
     <div className={styles.foldersWrapper}>
       {testdata.map((data, i) => (
-        <FolderCard data={data} key={i} />
+        <FolderCard data={data} key={i} setIsOpenFolder={setIsOpenFolder} />
       ))}
     </div>
   );
