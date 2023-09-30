@@ -10,6 +10,7 @@ const AppError = require(path.join(__dirname, "..", "utilities", "AppError"));
 const sharp = require("sharp");
 
 exports.createFolder = catchAsync(async (req, res, next) => {
+  console.log(req.files);
   if (!req.body.folderName)
     return next(new AppError(400, "Please provide folder name!"));
 
@@ -17,6 +18,8 @@ exports.createFolder = catchAsync(async (req, res, next) => {
     name: req.body.folderName,
     images: [],
   });
+
+  await folder.save();
   for (const file of req.files) {
     if (!file.mimetype.startsWith("image"))
       return next(new AppError(400, "Please provide correct image type"));
@@ -37,9 +40,16 @@ exports.createFolder = catchAsync(async (req, res, next) => {
   }
 
   await folder.save();
-
   res.status(201).json({
     status: "success",
     message: "Folder created successfully!",
+  });
+});
+
+exports.getAllFolders = catchAsync(async (req, res, next) => {
+  const folders = await Folder.find();
+  res.status(200).json({
+    status: "success",
+    folders,
   });
 });

@@ -1,14 +1,20 @@
 /* eslint-disable react/prop-types */
+import { useFolderContext } from "../../../context/FolderContext";
 import styles from "./FolderCard.module.scss";
-export default function FolderCard({ data, setIsOpenFolder }) {
+import { AiFillFolderOpen } from "react-icons/ai";
+export default function FolderCard({ data }) {
+  const { setActiveFolder } = useFolderContext();
   return (
-    <div className={styles.folder} onClick={() => setIsOpenFolder(data.title)}>
+    <div className={styles.folder} onClick={() => setActiveFolder(data)}>
       <div className={styles.second_box}></div>
       <div className={styles.first_box}></div>
-      <img src={data.background_image} alt="photo" />
+      {data.images.length > 0 && (
+        <img src={`http://127.0.0.1:3000/${data.images[0]}`} alt="photo" />
+      )}
+      {data.images.length === 0 && <AiFillFolderOpen />}
       <div>
-        <span>{data.title}</span>
-        <span>{data.item_length}</span>
+        <span>{data.name}</span>
+        <span>{data.images.length}</span>
       </div>
     </div>
   );

@@ -2,10 +2,18 @@
   height: 20rem;
   border-radius: 6px;
   position: relative;
-  transition: .2s;
+  transition: 0.2s;
   cursor: pointer;
   z-index: 1;
-  
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -90%);
+    font-size: 5rem;
+    color: #888;
+  }
   .first_box,
   .second_box {
     position: absolute;
@@ -15,15 +23,15 @@
     z-index: 0;
     height: 80%;
   }
-  
+
   .first_box {
-    background-color: #EDEEF3;
+    background-color: #edeef3;
     top: -8px;
     width: 90%;
   }
 
   .second_box {
-    background-color: #F3F4F7;
+    background-color: #f3f4f7;
     top: -14px;
     width: 80%;
   }
@@ -42,16 +50,16 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: .7rem 1rem;
+    padding: 0.7rem 1rem;
   }
 
   &:hover {
-    -webkit-box-shadow: 0px 6px 33px -18px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 6px 33px -18px rgba(0,0,0,0.75);
-    box-shadow: 0px 6px 33px -18px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 6px 33px -18px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 6px 33px -18px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 6px 33px -18px rgba(0, 0, 0, 0.75);
   }
 
-  span{
+  span {
     &:last-child {
       color: #888;
       font-size: 1rem;
