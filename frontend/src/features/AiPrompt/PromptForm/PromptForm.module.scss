@@ -1,0 +1,52 @@
+.promptForm {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  max-width: 50rem;
+  input {
+    min-width: 50rem;
+    max-width: 50rem;
+    box-shadow: rgba(109, 40, 217, 0.4) 5px 5px,
+      rgba(109, 40, 217, 0.3) 10px 10px, rgba(109, 40, 217, 0.2) 15px 15px,
+      rgba(109, 40, 217, 0.1) 20px 20px, rgba(109, 40, 217, 0.05) 25px 25px;
+    border: none;
+    outline: none;
+    padding: 1rem;
+    border-radius: 6px;
+    background-color: #ede9fe;
+
+    &::placeholder {
+      color: #313131;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+  }
+
+  button {
+    padding: 1.4rem;
+    border: none;
+    outline: none;
+    background-color: #6d28d9;
+    border-radius: 6px;
+    color: #ede9fe;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: rgba(109, 40, 217, 0.4) 5px 5px,
+      rgba(109, 40, 217, 0.3) 10px 10px, rgba(109, 40, 217, 0.2) 15px 15px,
+      rgba(109, 40, 217, 0.1) 20px 20px, rgba(109, 40, 217, 0.05) 25px 25px;
+  }
+
+  img {
+    width: 100%;
+    border-radius: 1rem;
+  }
+
+  h1 {
+    font-family: "Inter", sans-serif;
+    color: #18181b;
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+}
