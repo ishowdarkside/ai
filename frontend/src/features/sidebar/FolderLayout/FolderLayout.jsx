@@ -29,8 +29,6 @@ export default function FolderLayout() {
     );
   }
 
-  console.log(files.length);
-
   if (isLoading) return <Spinner />;
   return (
     <div className={styles.folder}>

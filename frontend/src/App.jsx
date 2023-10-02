@@ -5,6 +5,7 @@ import Home from "./pages/Home/Home";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import FolderContext from "./context/FolderContext";
+import AiPrompt from "./pages/AiPrompt/AiPrompt";
 function App() {
   const queryClient = new QueryClient();
   return (
@@ -19,6 +20,7 @@ function App() {
               </FolderContext>
             }
           />
+          <Route path="/ai-prompt" element={<AiPrompt />} />
         </Routes>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
