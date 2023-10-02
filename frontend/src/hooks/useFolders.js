@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createFolder, getAllFolders } from "../services/folders";
+import { createFolder, getAllFolders, updateFolder } from "../services/folders";
 import { toast } from "react-hot-toast";
 export function useGetFolders() {
   const {
@@ -24,7 +24,22 @@ export function useCreateFolder() {
         return queryClient.invalidateQueries(["folders"]);
       if (res.status !== "success") return toast.error(res.message);
     },
-    onError: (err) => toast.error(err.message),
+    onError: (err) => {
+      toast.error(err.message || "Something went really wrong");
+    },
+  });
+
+  return { mutate, isLoading };
+}
+
+export function useUpdateFolder() {
+  const queryClient = useQueryClient();
+  const { mutate, isLoading } = useMutation({
+    mutationFn: ({ id, formData }) => updateFolder(id, formData),
+    onSuccess: () => queryClient.invalidateQueries(["folders"]),
+    onError: (err) => {
+      toast.error(err.message || "Something went really wrong");
+    },
   });
 
   return { mutate, isLoading };

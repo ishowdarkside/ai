@@ -23,9 +23,21 @@ export async function createFolder(formData) {
       }
     );
 
-    console.log(response);
     return response.data;
   } catch (err) {
-    console.log(err);
+    throw new Error(err.response?.data?.message);
+  }
+}
+
+export async function updateFolder(folderId, formData) {
+  try {
+    const response = await axios.patch(
+      `${BASE_URL}api/folders/${folderId}`,
+      formData,
+      { headers: { "Content-Type": "multipart/form-data" } }
+    );
+    return response.data;
+  } catch (err) {
+    throw new Error(err.response?.data?.message);
   }
 }

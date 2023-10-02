@@ -3,6 +3,7 @@ import { useState } from "react";
 import styles from "./CreateFolderPanel.module.scss";
 import { FaTimes } from "react-icons/fa";
 import { useCreateFolder } from "../../../hooks/useFolders";
+import Spinner from "../../../utilities/Spinner/Spinner";
 export default function CreateFolderPanel({ onClosePanel }) {
   const [files, setFiles] = useState([]);
   const [folderName, setFolderName] = useState("");
@@ -18,11 +19,16 @@ export default function CreateFolderPanel({ onClosePanel }) {
     const photoArr = Array.from(files);
     photoArr.forEach((f) => formData.append("photos", f));
     formData.append("folderName", folderName);
-    mutate(formData);
-    onClosePanel(false);
+    mutate(formData, {
+      onSuccess: (res) => {
+        console.log(res);
+        if (res) onClosePanel(false);
+      },
+      onError: (err) => console.log(err.message),
+    });
   }
 
-  if (isLoading) return <h1>...LOADING...</h1>;
+  if (isLoading) return <Spinner />;
   return (
     <div className={styles.createFolderPanel}>
       <button className={styles.closePanel} onClick={() => onClosePanel(false)}>
