@@ -9,9 +9,12 @@ export default function PromptForm() {
   const [isLoading, setIsLoading] = useState(false);
   async function handleSubmit(e) {
     e.preventDefault();
+    if (!input) return;
+
+    setImgLink(null);
     setIsLoading(true);
     const data = await prompt(input);
-    setImgLink(data.data.output[0].tmp_url);
+    setImgLink(data.data.output);
     setIsLoading(false);
     setInput("");
   }
