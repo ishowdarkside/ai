@@ -5,8 +5,11 @@ const context = createContext();
 
 export default function PromptContext({ children }) {
   const [imgLink, setImgLink] = useState(null);
+  const [selectedImages, setSelectedImages] = useState([]);
   return (
-    <context.Provider value={{ imgLink, setImgLink }}>
+    <context.Provider
+      value={{ imgLink, setImgLink, selectedImages, setSelectedImages }}
+    >
       {children}
     </context.Provider>
   );

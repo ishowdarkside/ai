@@ -6,6 +6,7 @@ export default function Navbar() {
       <ul>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/ai-prompt">AI Prompt</NavLink>
+        <NavLink to="/myImages">My Images</NavLink>
       </ul>
     </nav>
   );

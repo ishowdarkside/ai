@@ -7,6 +7,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import FolderContext from "./context/FolderContext";
 import AiPrompt from "./pages/AiPrompt/AiPrompt";
 import PromptContext from "./context/PromptContext";
+import MyImages from "./pages/MyImages/MyImages";
 function App() {
   const queryClient = new QueryClient();
   return (
@@ -29,6 +30,7 @@ function App() {
               </PromptContext>
             }
           />
+          <Route path="/myImages" element={<MyImages />} />
         </Routes>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
