@@ -2,16 +2,16 @@ import styles from "./PromptForm.module.scss";
 import { prompt } from "../../../services/prompt";
 import { useState } from "react";
 import Spinner from "../../../utilities/Spinner/Spinner";
+import { usePromptContext } from "../../../context/PromptContext";
 export default function PromptForm() {
   const [input, setInput] = useState("");
-  const [isReady, setIsReady] = useState(null);
+  const { setImgLink } = usePromptContext();
   const [isLoading, setIsLoading] = useState(false);
-
   async function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
     const data = await prompt(input);
-    setIsReady(data.data.output[0].tmp_url);
+    setImgLink(data.data.output[0].tmp_url);
     setIsLoading(false);
     setInput("");
   }
@@ -19,20 +19,19 @@ export default function PromptForm() {
   if (isLoading) return <Spinner />;
   return (
     <form className={styles.promptForm} onSubmit={(e) => handleSubmit(e)}>
-      <h1>Generate your perfect AI Image</h1>
-      <input
-        type="text"
-        placeholder="A delicious ceviche cheesecake slice"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
-      <button>Generate AI Image</button>
+      <h1>
+        Generate your perfect <span>AI Image</span>
+      </h1>
 
-      {isReady && (
-        <a href={isReady}>
-          <img src={isReady} />
-        </a>
-      )}
+      <div className={styles.inputWrapper}>
+        <input
+          type="text"
+          placeholder="A delicious ceviche cheesecake slice"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <button>Generate</button>
+      </div>
     </form>
   );
 }
