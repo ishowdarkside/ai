@@ -1,24 +1,23 @@
 form {
-	height: 50%;
-	.uploud {
-		background-color: #fafbfc;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		border: 1px dashed #2b2c39;
-		border-radius: 10px;
-		height: 100%;
-		width: 100%;
-		cursor: pointer;
-		transition: .2s;
+  .uploud {
+    background-color: #fafbfc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed #2b2c39;
+    border-radius: 10px;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    transition: 0.2s;
 
-		&:hover {
-			background-color: #f2f4fc;
-		}
-	}
+    &:hover {
+      background-color: #f2f4fc;
+    }
+  }
 
-	.hide_input {
-		display: none;
-	}
+  .hide_input {
+    display: none;
+  }
 }
