@@ -35,19 +35,13 @@ export default function FolderLayout() {
 			<button onClick={() => setActiveFolder(null)}>
 				<BsArrowLeftShort />
 			</button>
-      {files.length > 0 && (
-				<div className={styles.add_image_output}>
-					<span>Add +{files.length} photos to this collection</span>
-					<button className={styles.saveBtn}>Save</button>
-				</div>
-			)}
-			{activeFolder.images.length === 0 && (
-				<span className={styles.emptySpan}>Empty folder. Start adding images</span>
-			)}
-			<div className={styles.folder_layout}>
-				{activeFolder.images.map((item, index) => <ImageCard data={item} key={index} />)}
-			</div>
 			<form onSubmit={(e) => handleSubmit(e)}>
+        {files.length > 0 && (
+          <div className={styles.add_image_output}>
+            <span>Add +{files.length} photos to this collection</span>
+            <button className={styles.saveBtn}>Save</button>
+          </div>
+        )}
 				<label htmlFor="photos" className={styles.add_image}>
 					<BsPlusLg />
 				</label>
@@ -60,6 +54,12 @@ export default function FolderLayout() {
 					multiple
 				/>
 			</form>
+			{activeFolder.images.length === 0 && (
+        <span className={styles.emptySpan}>Empty folder. Start adding images</span>
+        )}
+			<div className={styles.folder_layout}>
+				{activeFolder.images.map((item, index) => <ImageCard data={item} key={index} />)}
+			</div>
 		</div>
 	);
 }
