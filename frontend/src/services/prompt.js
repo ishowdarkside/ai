@@ -12,13 +12,13 @@ export async function prompt(promptInput) {
       body: JSON.stringify({
         input: promptInput,
         options: {
-          number_of_images: 12,
+          number_of_images: 4,
         },
       }),
     });
 
     const data = await res.json();
-    console.log(data);
+
     return data;
   } catch (err) {
     console.log(err);
