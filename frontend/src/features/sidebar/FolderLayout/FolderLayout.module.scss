@@ -1,6 +1,23 @@
 .folder {
   position: relative;
 
+  .add_image_output {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 3rem 0 1rem 0;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: #f4f2fc;
+
+    .saveBtn {
+      background-color: #6d28d9;
+      padding: 1rem 2rem;
+      color: #fff;
+      border-radius: 100px;
+    }
+  }
+
   button {
     display: flex;
     align-items: center;
