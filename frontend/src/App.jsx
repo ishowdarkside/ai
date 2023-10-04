@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Home from "./pages/Home/Home";
-
+import FileContext from "./context/fileContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import FolderContext from "./context/FolderContext";
@@ -17,9 +17,11 @@ function App() {
           <Route
             path="/"
             element={
-              <FolderContext>
-                <Home />
-              </FolderContext>
+              <FileContext>
+                <FolderContext>
+                  <Home />
+                </FolderContext>
+              </FileContext>
             }
           />
           <Route
