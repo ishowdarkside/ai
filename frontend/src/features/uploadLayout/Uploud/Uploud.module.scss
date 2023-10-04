@@ -1,76 +1,49 @@
 .form {
-  height: 40rem;
+	height: 40rem;
 
-  .uploud {
-    background-color: #fafbfc;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 1px dashed #2b2c39;
-    border-radius: 10px;
-    height: 100%;
-    width: 100%;
-    cursor: pointer;
-    transition: 0.2s;
+	.uploud {
+		background-color: #fafbfc;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		border: 1px dashed #2b2c39;
+		border-radius: 10px;
+		height: 100%;
+		width: 100%;
+		cursor: pointer;
+		transition: 0.2s;
 
-    &:hover {
-      background-color: #f2f4fc;
-    }
+		&:hover {
+			background-color: #f2f4fc;
+		}
 
-    .header {
-      text-align: center;
-      padding-bottom: 3rem;
-      border-bottom: 1px solid #ddd;
-      svg {
-        font-size: 5rem;
-      }
-      h2 {
-        font-family: Inter;
-        margin: 2rem 0;
-      }
-      p {
-        font-size: 1.6rem;
-        font-weight: 600;
+		svg {
+			font-size: 5rem;
+		}
+		h2 {
+			font-family: Inter;
+			margin: 2rem 0;
+		}
+		p {
+			font-size: 1.6rem;
+			font-weight: 600;
 
-        span {
-          color: #5d57ff;
-        }
+			span {
+				color: #5d57ff;
+			}
 
-        &:last-child {
-          font-weight: 400;
-          color: #888;
-          font-family: Montserrat;
-          font-size: 1.4rem;
-          margin: 1rem 0;
-        }
-      }
-    }
+			&:last-child {
+				font-weight: 400;
+				color: #888;
+				font-family: Montserrat;
+				font-size: 1.4rem;
+				margin: 1rem 0;
+			}
+		}
+	}
 
-    .footer {
-      padding: 2rem 0;
-      display: flex;
-      align-items: center;
-
-      .text {
-        p {
-          font-family: Montserrat;
-          font-weight: 600;
-          font-size: 1.4rem;
-
-          &:last-child {
-            font-weight: normal;
-            font-size: 1.3rem;
-            width: 80%;
-            color: #888;
-            margin: 0.7rem 0;
-          }
-        }
-      }
-    }
-  }
-
-  .hide_input {
-    display: none;
-  }
+	.hide_input {
+		display: none;
+	}
 }
