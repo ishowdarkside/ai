@@ -1,10 +1,15 @@
+import { useEffect, useRef, useState } from 'react';
 import { GrGallery } from 'react-icons/gr';
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import Draggable from "react-draggable";  
 import styles from './Uploud.module.scss';
-import { useState } from 'react';
+import DraggableBox from '../DraggableBox/DraggableBox';
+
 export default function Uploud() {
   const [ file, setFile ] = useState(null)
   const [ image, setImage ] = useState(null)
-
+ 
   function handleImageChange(e) {
     setFile(e.target.files[0])
     const reader = new FileReader();
@@ -32,9 +37,12 @@ export default function Uploud() {
     <div className={styles.generator}>
       <span onClick={() => setFile(null)}>Choose product</span>
       <div className={styles.promptWrapper}>
+      <DndProvider backend={HTML5Backend}>
         <div className={styles.image}>
-          <img src={image} alt="" />
+          <DraggableBox id="box1" left={50} top={50} image={image}>
+          </DraggableBox>
         </div>
+      </DndProvider>
         <div className={styles.form}>
           <textarea></textarea>
         </div>
