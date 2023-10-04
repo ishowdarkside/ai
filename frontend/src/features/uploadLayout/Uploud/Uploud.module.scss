@@ -69,11 +69,16 @@
     justify-content: center;
     gap: 2rem;
 
+	& > * {
+		flex-grow: 1
+	}
+
     .image {
       background-image: url('../../../assets/transparent_image_bg.jpg');
       background-repeat: no-repeat;
+	  background-size: cover;
       position: relative;
-      width: 100%;
+     
       border: 1px solid #fff;
       overflow: hidden;
 
@@ -87,7 +92,7 @@
     }
     
     .form {
-      width: 100%;
+      
 
       textarea {
         resize: none;
