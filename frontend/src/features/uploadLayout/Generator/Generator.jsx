@@ -7,7 +7,6 @@ import styles from "./Generator.module.scss";
 export default function Generator() {
   const { image, setFile } = useFileContext();
   const { selectedBackground } = useFileContext();
-  console.log(selectedBackground);
   return (
     <div className={styles.generator}>
       <span onClick={() => setFile(null)}>Choose product</span>
