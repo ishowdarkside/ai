@@ -39,7 +39,7 @@ export default function Generator() {
 
     mergeImages([
       backgroundByte,
-      { src: resizedProduct, x: x * 2, y: y * 2 },
+      { src: resizedProduct, x: x * 1.5, y: y * 1.5 },
     ]).then((b64) => setProcessedProduct(b64));
   }
   return (

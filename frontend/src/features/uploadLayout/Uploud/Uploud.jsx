@@ -1,6 +1,6 @@
 import { GrGallery } from "react-icons/gr";
-import styles from "./Uploud.module.scss";
 import { useFileContext } from "../../../context/fileContext";
+import styles from "./Uploud.module.scss";
 
 export default function Uploud() {
   const { setFile, setImage } = useFileContext();
