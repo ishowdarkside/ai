@@ -25,7 +25,8 @@
       position: relative;
       background-size: cover;
       background-position: center;
-      width: 100%;
+      width: 40rem;
+      height: 40rem;
       border: 1px solid #fff;
       overflow: hidden;
 
@@ -66,10 +67,10 @@
         background-color: #6d28d9;
         width: 100%;
         cursor: pointer;
-        transition: .2s;
+        transition: 0.2s;
 
         &:hover {
-          opacity: .8;
+          opacity: 0.8;
         }
       }
     }

@@ -8,11 +8,14 @@ export default function FileContext({ children }) {
   const [file, setFile] = useState(null);
   const [image, setImage] = useState(null);
   const [selectedBackground, setSelectedBackground] = useState(null);
+  const [positions, setPositions] = useState({});
   return (
     <context.Provider
       value={{
         file,
         setFile,
+        setPositions,
+        positions,
         image,
         setImage,
         selectedBackground,
