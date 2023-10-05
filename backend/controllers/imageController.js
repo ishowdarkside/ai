@@ -64,7 +64,7 @@ exports.resizeProduct = catchAsync(async (req, res, next) => {
   const buffer = Buffer.from(productBase64, "base64");
 
   const data = await sharp(buffer)
-    .resize({ width: 220, height: 210, fit: "inside" })
+    .resize({ width: 200, height: 200, fit: "inside" })
     .toBuffer();
   const resizedImage = data.toString("base64");
 

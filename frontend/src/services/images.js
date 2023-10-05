@@ -1,4 +1,5 @@
 const BASE_URL = `http://127.0.0.1:3000/`;
+import { toast } from "react-hot-toast";
 
 export async function saveImage(imageUrl) {
   try {
@@ -37,6 +38,11 @@ export async function resizeProduct(productImage) {
       }),
     });
     const data = await res.json();
+    console.log(data);
+    if (data.err?.type === "entity.too.large")
+      return toast.error(
+        "Product image too large. Please compress it or choose different one"
+      );
     return data.resizedProduct;
   } catch (err) {
     console.log(err);

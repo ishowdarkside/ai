@@ -6,14 +6,16 @@ import styles from "./Generator.module.scss";
 import mergeImages from "merge-images";
 import { useEffect, useState } from "react";
 import { resizeProduct } from "../../../services/images";
+import { BsFillImageFill } from "react-icons/bs";
 
 export default function Generator() {
   const {
     image,
     setFile,
     positions: { x, y },
+    selectedBackground,
   } = useFileContext();
-  const { selectedBackground } = useFileContext();
+
   const [backgroundByte, setBackgroundByte] = useState(null);
   const [processedProduct, setProcessedProduct] = useState(null);
 
@@ -34,6 +36,7 @@ export default function Generator() {
   }, [selectedBackground]);
   async function handleCompose() {
     const resizedProduct = await resizeProduct(image);
+
     mergeImages([
       backgroundByte,
       { src: resizedProduct, x: x * 2, y: y * 2 },
@@ -41,32 +44,53 @@ export default function Generator() {
   }
   return (
     <div className={styles.generator}>
-      <span onClick={() => setFile(null)}>Choose product</span>
-      <div className={styles.promptWrapper}>
-        <DndProvider backend={HTML5Backend}>
-          <div
-            className={styles.image}
-            style={
-              selectedBackground && {
-                backgroundImage: `url(http://127.0.0.1:3000/${selectedBackground})`,
+      <div className={styles.panelsWrapper}>
+        <div className={styles.promptWrapper}>
+          <button onClick={() => setFile(null)} className={styles.chooseFile}>
+            Choose product
+          </button>
+          <DndProvider backend={HTML5Backend}>
+            <div
+              className={styles.image}
+              style={
+                selectedBackground && {
+                  backgroundImage: `url(http://127.0.0.1:3000/${selectedBackground})`,
+                }
               }
-            }
+            >
+              <DraggableBox
+                id="box1"
+                left={50}
+                top={50}
+                image={image}
+              ></DraggableBox>
+            </div>
+          </DndProvider>
+
+          <button
+            disabled={selectedBackground ? false : true}
+            onClick={handleCompose}
+            className={styles.generateBtn}
           >
-            <DraggableBox
-              id="box1"
-              left={50}
-              top={50}
-              image={image}
-            ></DraggableBox>
-          </div>
-        </DndProvider>
-        <div className={styles.form}>
-          {selectedBackground && (
-            <button onClick={handleCompose}>Generate</button>
-          )}
+            Generate
+          </button>
         </div>
+        {processedProduct ? (
+          <a href={processedProduct} download className={styles.outputLink}>
+            <div className={styles.outputOverlay}>
+              <span>CLICK TO DOWNLOAD IMAGE</span>
+            </div>
+            <div
+              style={{ backgroundImage: `url(${processedProduct})` }}
+              className={styles.outputWrapper}
+            ></div>
+          </a>
+        ) : (
+          <div className={styles.fillPlaceholder}>
+            <BsFillImageFill />
+          </div>
+        )}
       </div>
-      {processedProduct && <div style={{ backgroundImage: `url(${processedProduct})`}} className={styles.output}></div>}
     </div>
   );
 }
