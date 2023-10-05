@@ -36,7 +36,7 @@ export default function Generator() {
     const resizedProduct = await resizeProduct(image);
     mergeImages([
       backgroundByte,
-      { src: resizedProduct, x: x * 1.8, y: y * 1.4 },
+      { src: resizedProduct, x: x * 2, y: y * 2 },
     ]).then((b64) => setProcessedProduct(b64));
   }
   return (
@@ -66,7 +66,7 @@ export default function Generator() {
           )}
         </div>
       </div>
-      {processedProduct && <img src={processedProduct} />}
+      {processedProduct && <div style={{ backgroundImage: `url(${processedProduct})`}} className={styles.output}></div>}
     </div>
   );
 }
