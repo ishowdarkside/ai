@@ -58,3 +58,20 @@ exports.getSavedImages = catchAsync(async (req, res, next) => {
     images,
   });
 });
+exports.resizeProduct = catchAsync(async (req, res, next) => {
+  const { productImage } = req.body;
+  const productBase64 = productImage.replace(/^data:image\/\w+;base64,/, "");
+  const buffer = Buffer.from(productBase64, "base64");
+
+  const data = await sharp(buffer)
+    .resize({ width: 220, height: 210, fit: "inside" })
+    .toBuffer();
+  const resizedImage = data.toString("base64");
+
+  //ubaciti funkcionlanost da se slika save-a na backend
+  res.status(200).json({
+    status: "success",
+    message: "Image saved successfully!",
+    resizedProduct: "data:image/png;base64," + resizedImage,
+  });
+});

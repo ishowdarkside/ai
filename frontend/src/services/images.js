@@ -26,3 +26,19 @@ export async function getSavedImages() {
     throw new Error(err);
   }
 }
+
+export async function resizeProduct(productImage) {
+  try {
+    const res = await fetch(`${BASE_URL}api/images/resizeProduct`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        productImage,
+      }),
+    });
+    const data = await res.json();
+    return data.resizedProduct;
+  } catch (err) {
+    console.log(err);
+  }
+}

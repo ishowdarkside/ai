@@ -5,6 +5,7 @@ import { useFileContext } from "../../../context/fileContext";
 import styles from "./Generator.module.scss";
 import mergeImages from "merge-images";
 import { useEffect, useState } from "react";
+import { resizeProduct } from "../../../services/images";
 
 export default function Generator() {
   const {
@@ -14,6 +15,7 @@ export default function Generator() {
   } = useFileContext();
   const { selectedBackground } = useFileContext();
   const [backgroundByte, setBackgroundByte] = useState(null);
+  const [processedProduct, setProcessedProduct] = useState(null);
 
   useEffect(() => {
     if (!selectedBackground) return;
@@ -31,9 +33,11 @@ export default function Generator() {
     convertByte();
   }, [selectedBackground]);
   async function handleCompose() {
-    mergeImages([backgroundByte, { src: image, x: x * 1.8, y: y * 1.4 }]).then(
-      (b64) => console.log(b64)
-    );
+    const resizedProduct = await resizeProduct(image);
+    mergeImages([
+      backgroundByte,
+      { src: resizedProduct, x: x * 1.8, y: y * 1.4 },
+    ]).then((b64) => setProcessedProduct(b64));
   }
   return (
     <div className={styles.generator}>
@@ -62,6 +66,7 @@ export default function Generator() {
           )}
         </div>
       </div>
+      {processedProduct && <img src={processedProduct} />}
     </div>
   );
 }

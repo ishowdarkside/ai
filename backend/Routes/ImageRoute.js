@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
-const { saveImage, getSavedImages } = require(path.join(
+const { saveImage, getSavedImages, resizeProduct } = require(path.join(
   __dirname,
   "..",
   "controllers",
@@ -10,5 +10,6 @@ const { saveImage, getSavedImages } = require(path.join(
 
 router.post("/save-image", saveImage);
 router.get("/savedImages", getSavedImages);
+router.post("/resizeProduct", resizeProduct);
 
 module.exports = router;
