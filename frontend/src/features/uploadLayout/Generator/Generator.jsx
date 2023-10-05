@@ -12,12 +12,15 @@ export default function Generator() {
   const {
     image,
     setFile,
+    file,
     positions: { x, y },
     selectedBackground,
+    boxRef,
   } = useFileContext();
 
   const [backgroundByte, setBackgroundByte] = useState(null);
   const [processedProduct, setProcessedProduct] = useState(null);
+  const [isMoving, setIsMoving] = useState(true);
 
   useEffect(() => {
     if (!selectedBackground) return;
@@ -25,6 +28,7 @@ export default function Generator() {
       const response = await fetch(
         `http://127.0.0.1:3000/${selectedBackground}`
       );
+
       const blob = await response.blob();
       const reader = new FileReader();
       reader.readAsDataURL(blob);
@@ -35,12 +39,27 @@ export default function Generator() {
     convertByte();
   }, [selectedBackground]);
   async function handleCompose() {
-    const resizedProduct = await resizeProduct(image);
+    const productWidth = boxRef.current.getBoundingClientRect().width;
+    const productHeight = boxRef.current.getBoundingClientRect().height;
+
+    const formData = new FormData();
+    formData.append("product", file, file.name);
+    formData.append("width", productWidth);
+    formData.append("height", productHeight);
+    const resizedProduct = await resizeProduct(
+      formData,
+      productWidth,
+      productHeight
+    );
 
     mergeImages([
       backgroundByte,
       { src: resizedProduct, x: x * 1.5, y: y * 1.5 },
-    ]).then((b64) => setProcessedProduct(b64));
+    ])
+      .then((b64) => setProcessedProduct(b64))
+      .catch((err) => {
+        console.log(err);
+      });
   }
   return (
     <div className={styles.generator}>
@@ -63,10 +82,17 @@ export default function Generator() {
                 left={50}
                 top={50}
                 image={image}
+                isMoving={isMoving}
               ></DraggableBox>
             </div>
           </DndProvider>
 
+          <button
+            onClick={() => setIsMoving((curr) => !curr)}
+            className={styles.toggleBtn}
+          >
+            {isMoving ? "Resize" : "Move"}
+          </button>
           <button
             disabled={selectedBackground ? false : true}
             onClick={handleCompose}

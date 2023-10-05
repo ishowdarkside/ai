@@ -1,5 +1,6 @@
 const BASE_URL = `http://127.0.0.1:3000/`;
 import { toast } from "react-hot-toast";
+import axios from "axios";
 
 export async function saveImage(imageUrl) {
   try {
@@ -28,23 +29,23 @@ export async function getSavedImages() {
   }
 }
 
-export async function resizeProduct(productImage) {
+export async function resizeProduct(formData) {
   try {
-    const res = await fetch(`${BASE_URL}api/images/resizeProduct`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        productImage,
-      }),
-    });
-    const data = await res.json();
-    console.log(data);
-    if (data.err?.type === "entity.too.large")
+    const response = await axios.post(
+      `${BASE_URL}api/images/resizeProduct`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    if (response.data.status === "error")
       return toast.error(
         "Product image too large. Please compress it or choose different one"
       );
-    return data.resizedProduct;
+    return response.data?.resizedProduct;
   } catch (err) {
-    console.log(err);
+    throw new Error(err.response?.data?.message);
   }
 }

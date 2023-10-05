@@ -59,12 +59,14 @@ exports.getSavedImages = catchAsync(async (req, res, next) => {
   });
 });
 exports.resizeProduct = catchAsync(async (req, res, next) => {
-  const { productImage } = req.body;
-  const productBase64 = productImage.replace(/^data:image\/\w+;base64,/, "");
-  const buffer = Buffer.from(productBase64, "base64");
+  const { width: productWidth, height: productHeight } = req.body;
 
-  const data = await sharp(buffer)
-    .resize({ width: 200, height: 200, fit: "inside" })
+  const data = await sharp(req.file.buffer)
+    .resize({
+      width: parseInt(productWidth * 1.8),
+      height: parseInt(productHeight * 1.8),
+      fit: "inside",
+    })
     .toBuffer();
   const resizedImage = data.toString("base64");
 

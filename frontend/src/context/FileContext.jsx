@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useRef, useState } from "react";
 
 const context = createContext();
 
@@ -9,6 +9,7 @@ export default function FileContext({ children }) {
   const [image, setImage] = useState(null);
   const [selectedBackground, setSelectedBackground] = useState(null);
   const [positions, setPositions] = useState({});
+  const boxRef = useRef(null);
   return (
     <context.Provider
       value={{
@@ -20,6 +21,7 @@ export default function FileContext({ children }) {
         setImage,
         selectedBackground,
         setSelectedBackground,
+        boxRef,
       }}
     >
       {children}

@@ -1,12 +1,47 @@
 .draggableImage {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    border: 1px solid blue;
-    cursor: move;
-    resize: both;
-    overflow: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  border: 1px solid rgba(212, 20, 155, 0.5);
+  cursor: move;
+}
+
+.resizer {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  z-index: 2;
+}
+.resizeNw {
+  top: -1px;
+  border-top: 2px solid rgb(212, 20, 155);
+  border-left: 2px solid rgb(212, 20, 155);
+
+  left: -1px;
+  cursor: nw-resize;
+}
+
+.resizeNe {
+  top: -1px;
+  right: -1px;
+  cursor: ne-resize;
+  border-top: 2px solid rgb(212, 20, 155);
+  border-right: 2px solid rgb(212, 20, 155);
+}
+
+.resizeSw {
+  bottom: -1px;
+  left: -1px;
+  cursor: sw-resize;
+  border-left: 2px solid rgb(212, 20, 155);
+  border-bottom: 2px solid rgb(212, 20, 155);
+}
+
+.resizeSe {
+  bottom: -1px;
+  right: -1px;
+  cursor: se-resize;
+  border-right: 2px solid rgb(212, 20, 155);
+  border-bottom: 2px solid rgb(212, 20, 155);
 }

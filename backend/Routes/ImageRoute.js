@@ -7,9 +7,10 @@ const { saveImage, getSavedImages, resizeProduct } = require(path.join(
   "controllers",
   "imageController"
 ));
-
+const multer = require("multer");
+const upload = multer({ storage: multer.memoryStorage() });
 router.post("/save-image", saveImage);
 router.get("/savedImages", getSavedImages);
-router.post("/resizeProduct", resizeProduct);
+router.post("/resizeProduct", upload.single("product"), resizeProduct);
 
 module.exports = router;
