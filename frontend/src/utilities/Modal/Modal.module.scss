@@ -1,0 +1,34 @@
+.modalOverlay {
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(149, 149, 149, 0.37);
+  z-index: 9999;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  height: 40rem;
+  background-color: #ffff;
+  width: 60rem;
+  border-radius: 1rem;
+  position: relative;
+}
+
+.closeModal {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 2.2rem;
+  cursor: pointer;
+}

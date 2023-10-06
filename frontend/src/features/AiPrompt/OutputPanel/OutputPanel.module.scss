@@ -1,0 +1,45 @@
+@import "../../../styles/mixin.scss";
+.outputWrapper {
+  width: 100%;
+  padding: 3rem;
+  max-width: 90rem;
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+
+  @include responsive-custom(31.25em) {
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  }
+
+  @include responsive-custom(21.25em) {
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  }
+  gap: 1rem;
+  row-gap: 2rem;
+
+  & > * {
+    max-width: 20rem;
+    @include responsive-custom(31.25em) {
+      max-width: 15rem;
+    }
+
+    @include responsive-custom(21.25em) {
+      max-width: 13rem;
+    }
+    border-radius: 1rem;
+    align-self: center;
+    justify-self: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
+
+.isSelected {
+  border: 1px solid #7c3aed;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}

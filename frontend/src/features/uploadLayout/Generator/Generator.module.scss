@@ -1,0 +1,214 @@
+@import "../../../styles/mixin.scss";
+
+.generator {
+  margin: 0 auto;
+  width: 100%;
+
+  .chooseFile {
+    position: absolute;
+    top: 0;
+    z-index: 999;
+    transform: translateY(-3rem);
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: #6d28d9;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+
+  .promptWrapper {
+    height: 50rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @include responsive-custom(81.25em) {
+      width: 40rem;
+      height: 40rem;
+    }
+
+    @include responsive-custom(51.42em) {
+      width: 32rem;
+      height: 32rem;
+    }
+    @include responsive-custom(36.25em) {
+      width: 100%;
+    }
+
+    .image {
+      border-radius: 5px;
+      background-image: url("../../../assets/transparent_image_bg.jpg");
+      background-repeat: no-repeat;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      width: 50rem;
+      height: 50rem;
+      border: 1px solid #fff;
+      overflow: hidden;
+      @include responsive-custom(81.25em) {
+        width: 40rem;
+        height: 40rem;
+      }
+      @include responsive-custom(51.42em) {
+        width: 32rem;
+        height: 32rem;
+      }
+
+      @include responsive-custom(36.25em) {
+        width: 100%;
+      }
+
+      img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        cursor: pointer;
+      }
+    }
+
+    .generateBtn {
+      padding: 1.5rem;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-family: Montserrat;
+      font-weight: bold;
+      color: #fff;
+      background-color: #6d28d9;
+      width: 100%;
+      cursor: pointer;
+      transition: 0.2s;
+      position: absolute;
+      bottom: -5.1rem;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  .outputWrapper {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 50rem;
+    height: 50rem;
+
+    @include responsive-custom(81.25em) {
+      width: 40rem;
+      height: 40rem;
+    }
+
+    @include responsive-custom(51.42em) {
+      width: 32rem;
+      height: 32rem;
+    }
+
+    @include responsive-custom(36.25em) {
+    }
+  }
+}
+
+.panelsWrapper {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+
+  @include responsive-custom(36.25em) {
+    flex-direction: column;
+
+    align-items: center;
+    gap: 7rem;
+  }
+}
+
+.outputLink {
+  position: relative;
+  display: block;
+  transition: all 0.2s ease;
+  &:hover .outputOverlay {
+    opacity: 1;
+  }
+
+  .outputOverlay {
+    position: absolute;
+    top: 0;
+    transition: all 0.3s ease;
+    opacity: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to right top,
+      rgba(#ebbdf2, 0.6),
+      rgba(#aaa6f7, 0.6),
+      rgba(#95c1fc, 0.6)
+    );
+
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    letter-spacing: 3px;
+  }
+}
+
+.fillPlaceholder {
+  width: 50rem;
+  height: 50rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e5e5e5;
+  font-size: 7rem;
+  color: #737373;
+
+  @include responsive-custom(81.25em) {
+    width: 40rem;
+    height: 40rem;
+  }
+
+  @include responsive-custom(51.42em) {
+    width: 32rem;
+    height: 32rem;
+  }
+
+  @include responsive-custom(36.25em) {
+    width: 100%;
+  }
+}
+
+.toggleBtn {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  font-size: 2rem;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s;
+  border-radius: 6px;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  .resizeIcon {
+  }
+}

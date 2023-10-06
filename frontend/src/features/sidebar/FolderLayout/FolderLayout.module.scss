@@ -1,0 +1,110 @@
+@import "../../../styles/mixin.scss";
+
+.folder {
+  position: relative;
+
+  .add_image_output {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 3rem 0 1rem 0;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: #f4f2fc;
+
+    .saveBtn {
+      background-color: #6d28d9;
+      padding: 1rem 2rem;
+      color: #fff;
+      border-radius: 100px;
+    }
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-family: Montserrat;
+    font-weight: 400;
+    width: auto;
+    color: #333;
+    font-size: 1.6rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+
+    svg {
+      font-size: 2.5rem;
+    }
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+  .folder_layout {
+    margin: 2rem 0 0 0;
+    display: grid;
+    flex-direction: column;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    gap: 1.5rem;
+
+    @include responsive-custom(81.25em) {
+      display: flex;
+      flex-direction: row;
+      overflow-y: auto;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    div {
+      border-radius: 1rem;
+      width: 100%;
+      overflow: hidden;
+
+      @include responsive-custom(81.25em) {
+        width: 12rem;
+        flex: 0 0 auto; /* This ensures child items don't shrink or grow */
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .hide_input {
+    display: none;
+  }
+
+  .add_image {
+    background-color: #f2f2f2;
+    display: flex;
+    color: #333;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 50%;
+    position: absolute;
+    right: 0;
+    top: -5px;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+
+.emptySpan {
+  display: block;
+  margin-top: 2.5rem;
+}
+
+.saveBtn {
+  background-color: red;
+  display: none;
+}

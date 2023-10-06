@@ -1,0 +1,9 @@
+.image {
+  background-color: #ddd;
+  cursor: pointer;
+  width: 100%;
+  transition: 0.2s;
+  &:hover {
+    opacity: 0.7;
+  }
+}

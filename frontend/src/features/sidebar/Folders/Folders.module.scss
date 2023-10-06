@@ -1,0 +1,23 @@
+@import "../../../styles/mixin.scss";
+
+.foldersWrapper {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  row-gap: 3rem;
+
+  @include responsive-custom(81.25em) {
+    display: flex;
+    margin-top: 0;
+    flex-direction: row;
+    overflow-y: auto;
+    width: 100%;
+    max-width: 100%;
+
+    & > * {
+      width: 20rem;
+      flex: 0 0 auto;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+@import "../../styles/mixin.scss";
+.uploudLayout {
+  flex-grow: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include responsive-custom(90em) {
+    padding: 3rem;
+  }
+
+  @include responsive-custom(81.25em) {
+    padding-top: 15rem;
+  }
+
+  @include responsive-custom(36.25em) {
+    padding-top: 12rem;
+  }
+}
