@@ -8,6 +8,7 @@ import FolderContext from "./context/FolderContext";
 import AiPrompt from "./pages/AiPrompt/AiPrompt";
 import PromptContext from "./context/PromptContext";
 import MyImages from "./pages/MyImages/MyImages";
+import ModalContext from "./context/ModalContext";
 function App() {
   const queryClient = new QueryClient();
   return (
@@ -17,11 +18,13 @@ function App() {
           <Route
             path="/"
             element={
-              <FileContext>
-                <FolderContext>
-                  <Home />
-                </FolderContext>
-              </FileContext>
+              <ModalContext>
+                <FileContext>
+                  <FolderContext>
+                    <Home />
+                  </FolderContext>
+                </FileContext>
+              </ModalContext>
             }
           />
           <Route

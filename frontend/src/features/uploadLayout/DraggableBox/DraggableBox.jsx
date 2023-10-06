@@ -41,7 +41,7 @@ const DraggableBox = ({ left, top, children, image, isMoving }) => {
         const newHeight =
           e.clientY - boxRef.current.getBoundingClientRect().top;
 
-        if (newWidth > 400 || newHeight > 400) return;
+        if (newWidth > 500 || newHeight > 500) return;
         setDimensions({ width: newWidth, height: newHeight });
       }
     }

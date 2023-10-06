@@ -8,6 +8,7 @@ const catchAsync = require(path.join(
 ));
 const AppError = require(path.join(__dirname, "..", "utilities", "AppError"));
 const sharp = require("sharp");
+const fsPromises = require("fs").promises;
 
 exports.createFolder = catchAsync(async (req, res, next) => {
   if (!req.body.folderName)
@@ -53,15 +54,24 @@ exports.getAllFolders = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.deleteFolder = catchAsync(async (req,res, next) => {
-  const folderDelete = await Folder.findByIdAndDelete(req.params.folderId);
+exports.deleteFolder = catchAsync(async (req, res, next) => {
+  const folderDelete = await Folder.findById(req.params.folderId);
 
-  if(!folderDelete) {
-    return res.status(400).json({ status: 'error', message: 'Something went wrong' })
+  if (!folderDelete) {
+    return res
+      .status(400)
+      .json({ status: "error", message: "Something went wrong" });
   }
 
-  res.status(200).json({ status: 'success', message: 'Folder deleted' })
-})
+  await Promise.all(
+    folderDelete.images.map(async (img) => {
+      await fsPromises.unlink(`public/${img}`);
+    })
+  );
+
+  await Folder.findByIdAndDelete(req.params.folderId);
+  res.status(200).json({ status: "success", message: "Folder deleted" });
+});
 
 exports.updateFolder = catchAsync(async (req, res, next) => {
   const folder = await Folder.findById(req.params.folderId);

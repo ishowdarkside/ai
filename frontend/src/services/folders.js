@@ -33,11 +33,11 @@ export async function deleteFolder(folderId) {
   try {
     const response = await axios.delete(`${BASE_URL}api/folders/${folderId}`, {
       headers: {
-        "Content-Type": "multipart/form-data"
-      }
+        "Content-Type": "multipart/form-data",
+      },
     });
     return response.data;
-  } catch (error) {
+  } catch (err) {
     throw new Error(err.response?.data?.message);
   }
 }

@@ -1,3 +1,25 @@
 .home {
   display: flex;
 }
+
+.modalRemoveFolder {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.btnWrapper {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+
+  button {
+    padding: 1rem 2.4rem;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    border-radius: 0.6rem;
+  }
+}
