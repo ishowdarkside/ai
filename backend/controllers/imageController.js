@@ -58,6 +58,13 @@ exports.getSavedImages = catchAsync(async (req, res, next) => {
     images,
   });
 });
+
+exports.deleteImage = catchAsync(async (req, res,next) => {
+  const deleteImage = await myImages.findOneAndDelete(req.params.imageId);
+  if(!deleteImage) return res.status(400).json({ status: 'error', message: "Something went wrong" })
+  res.status(200).json({ status: "success", messsage: "Image has been deleted" })
+})
+
 exports.resizeProduct = catchAsync(async (req, res, next) => {
   const { width: productWidth, height: productHeight } = req.body;
 
