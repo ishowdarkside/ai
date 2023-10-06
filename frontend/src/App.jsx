@@ -9,6 +9,8 @@ import AiPrompt from "./pages/AiPrompt/AiPrompt";
 import PromptContext from "./context/PromptContext";
 import MyImages from "./pages/MyImages/MyImages";
 import ModalContext from "./context/ModalContext";
+import NotFound from "./pages/NotFound/NotFound";
+import MyProducts from "./pages/MyProducts/MyProducts";
 function App() {
   const queryClient = new QueryClient();
   return (
@@ -36,6 +38,8 @@ function App() {
             }
           />
           <Route path="/myImages" element={<MyImages />} />
+          <Route path="/myProducts" element={<MyProducts />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />

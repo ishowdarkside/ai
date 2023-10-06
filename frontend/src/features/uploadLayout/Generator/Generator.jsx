@@ -6,8 +6,9 @@ import mergeImages from "merge-images";
 import { useEffect, useState } from "react";
 import { resizeProduct } from "../../../services/images";
 import { BsFillImageFill, BsArrowsMove } from "react-icons/bs";
-import { IoMdResize } from 'react-icons/io';
+import { IoMdResize } from "react-icons/io";
 import styles from "./Generator.module.scss";
+import toast from "react-hot-toast";
 
 export default function Generator() {
   const {
@@ -92,7 +93,15 @@ export default function Generator() {
             onClick={() => setIsMoving((curr) => !curr)}
             className={styles.toggleBtn}
           >
-            {isMoving ? <div className={styles.resizeIcon}><IoMdResize /></div> : <div className={styles.moveIcon}><BsArrowsMove /></div>}
+            {isMoving ? (
+              <div className={styles.resizeIcon}>
+                <IoMdResize />
+              </div>
+            ) : (
+              <div className={styles.moveIcon}>
+                <BsArrowsMove />
+              </div>
+            )}
           </button>
           <button
             disabled={selectedBackground ? false : true}
@@ -103,7 +112,27 @@ export default function Generator() {
           </button>
         </div>
         {processedProduct ? (
-          <a href={processedProduct} download className={styles.outputLink}>
+          <a
+            href={processedProduct}
+            download
+            className={styles.outputLink}
+            onClick={() => {
+              try {
+                const items =
+                  JSON.parse(sessionStorage.getItem("generatedImages")) || [];
+
+                console.log(items.length);
+                sessionStorage.setItem(
+                  "generatedImages",
+                  JSON.stringify([...items, processedProduct])
+                );
+              } catch (err) {
+                toast.error(
+                  "Browser storage exceeded. To store new images, please remove some images from storage"
+                );
+              }
+            }}
+          >
             <div className={styles.outputOverlay}>
               <span>CLICK TO DOWNLOAD IMAGE</span>
             </div>
