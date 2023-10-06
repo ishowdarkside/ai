@@ -8,7 +8,7 @@ export default function Folders() {
   const { isLoading, folders } = useGetFolders();
   const { mutate, isLoading: loading } = useDeleteFolder();
 
-  async function handleFolderDelete(folderId) {
+  function handleFolderDelete(folderId) {
     mutate({ id: folderId }, {
       onSuccess: res => {
         if(res.status === 'success') console.log(`Folder with id: ${folderId} is deleted`)

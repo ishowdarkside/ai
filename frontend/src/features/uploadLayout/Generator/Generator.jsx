@@ -2,11 +2,12 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import DraggableBox from "../DraggableBox/DraggableBox";
 import { useFileContext } from "../../../context/fileContext";
-import styles from "./Generator.module.scss";
 import mergeImages from "merge-images";
 import { useEffect, useState } from "react";
 import { resizeProduct } from "../../../services/images";
-import { BsFillImageFill } from "react-icons/bs";
+import { BsFillImageFill, BsArrowsMove } from "react-icons/bs";
+import { IoMdResize } from 'react-icons/io';
+import styles from "./Generator.module.scss";
 
 export default function Generator() {
   const {
@@ -91,7 +92,7 @@ export default function Generator() {
             onClick={() => setIsMoving((curr) => !curr)}
             className={styles.toggleBtn}
           >
-            {isMoving ? "Resize" : "Move"}
+            {isMoving ? <div className={styles.resizeIcon}><IoMdResize /></div> : <div className={styles.moveIcon}><BsArrowsMove /></div>}
           </button>
           <button
             disabled={selectedBackground ? false : true}
