@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getSavedImages, saveImage } from "../services/images";
+import { deleteImage, getSavedImages, saveImage } from "../services/images";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 export function useGetSavedImages() {
@@ -29,6 +29,19 @@ export function useSaveImages() {
           navigate("/myImages");
         }, 1000);
       }
+    },
+  });
+
+  return { mutate, isLoading };
+}
+
+export function useDeleteImage() {
+  const queryClient = useQueryClient();
+  const { mutate, isLoading } = useMutation({
+    mutationFn: (id) => deleteImage(id),
+    onSuccess: () => queryClient.invalidateQueries(["savedImages"]),
+    onError: (err) => {
+      toast.error(err.message || "Something went really wrong");
     },
   });
 

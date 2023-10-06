@@ -5,7 +5,6 @@ import styles from "./Folders.module.scss";
 
 export default function Folders() {
   const { isLoading, folders } = useGetFolders();
-
   const { isLoading: loading } = useDeleteFolder();
 
   if (isLoading || loading) return <Spinner />;

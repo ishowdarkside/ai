@@ -4,8 +4,8 @@ import Sidebar from "../../features/sidebar/Sidebar";
 import UploudLayout from "../../features/uploadLayout/UploudLayout";
 import Modal from "../../utilities/Modal/Modal";
 import Navbar from "../../utilities/Navbar/Navbar";
-import styles from "./Home.module.scss";
 import { useDeleteFolder } from "../../hooks/useFolders";
+import styles from "./Home.module.scss";
 
 export default function Home() {
   const { isOpenModal, setIsOpenModal, selectedFolder, setSelectedFolder } =
