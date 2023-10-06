@@ -46,10 +46,10 @@ export default function Generator() {
 
 		mergeImages([ backgroundByte, { src: resizedProduct, x: x * 1.5, y: y * 1.5 } ])
 			.then((b64) => {
-				const items = JSON.parse(sessionStorage.getItem('generatedImages')) || [];
+				const items = JSON.parse(localStorage.getItem('generatedImages')) || [];
 
 				console.log(items.length);
-				sessionStorage.setItem('generatedImages', JSON.stringify([ ...items, b64 ]));
+				localStorage.setItem('generatedImages', JSON.stringify([ ...items, b64 ]));
 				setProcessedProduct(b64);
 			})
 			.catch((err) => {

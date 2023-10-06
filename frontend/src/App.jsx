@@ -45,7 +45,14 @@ function App() {
 							</ModalContext>
 						}
 					/>
-					<Route path="/myProducts" element={<MyProducts />} />
+					<Route
+						path="/myProducts"
+						element={
+							<ModalContext>
+								<MyProducts />
+							</ModalContext>
+						}
+					/>
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</BrowserRouter>

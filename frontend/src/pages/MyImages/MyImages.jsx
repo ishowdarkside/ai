@@ -2,9 +2,9 @@ import { useDeleteImage, useGetSavedImages } from "../../hooks/useImages";
 import Navbar from "../../utilities/Navbar/Navbar";
 import Spinner from "../../utilities/Spinner/Spinner";
 import { FaTimes } from 'react-icons/fa'
-import styles from "./MyImages.module.scss";
 import { useModalContext } from "../../context/ModalContext";
 import Modal from "../../utilities/Modal/Modal";
+import styles from "./MyImages.module.scss";
 export default function MyImages() {
   const { isOpenModal, setIsOpenModal, selectedImage, setSelectedImage } = useModalContext();
   const { data, isLoading } = useGetSavedImages();
