@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createFolder, getAllFolders, updateFolder } from "../services/folders";
+import { createFolder, deleteFolder, getAllFolders, updateFolder } from "../services/folders";
 import { toast } from "react-hot-toast";
 export function useGetFolders() {
   const {
@@ -30,6 +30,19 @@ export function useCreateFolder() {
   });
 
   return { mutate, isLoading };
+}
+
+export function useDeleteFolder() {
+  const queryClient = useQueryClient();
+  const { mutate, isLoading } = useMutation({
+    mutationFn: ({ id }) => deleteFolder(id),
+    onSuccess: () => queryClient.invalidateQueries(["folders"]),
+    onError: (err) => {
+      toast.error(err.message || "Something went really wrong");
+    }
+  })
+
+  return { mutate, isLoading }
 }
 
 export function useUpdateFolder() {

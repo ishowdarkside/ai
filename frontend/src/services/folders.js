@@ -29,6 +29,19 @@ export async function createFolder(formData) {
   }
 }
 
+export async function deleteFolder(folderId) {
+  try {
+    const response = await axios.delete(`${BASE_URL}api/folders/${folderId}`, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(err.response?.data?.message);
+  }
+}
+
 export async function updateFolder(folderId, formData) {
   try {
     const response = await axios.patch(
