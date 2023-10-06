@@ -29,6 +29,21 @@ export async function getSavedImages() {
   }
 }
 
+export async function deleteImage(imageId) {
+  try {
+    const res = await fetch(`${BASE_URL}api/images/${imageId}`, {
+      method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json"
+      },
+    })
+    const data = await res.json();
+    return data.images;
+  } catch (error) {
+    throw new Error(err)
+  }
+}
+
 export async function resizeProduct(formData) {
   try {
     const response = await axios.post(

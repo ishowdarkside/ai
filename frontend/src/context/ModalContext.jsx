@@ -6,10 +6,11 @@ const context = createContext();
 export default function ModalContext({ children }) {
   const [isOpenModal, setIsOpenModal] = useState(true);
   const [selectedFolder, setSelectedFolder] = useState(null);
+  const [ selectedImage, setSelectedImage ] = useState(null);
 
   return (
     <context.Provider
-      value={{ isOpenModal, setIsOpenModal, selectedFolder, setSelectedFolder }}
+      value={{ isOpenModal, setIsOpenModal, selectedFolder, setSelectedFolder, selectedImage, setSelectedImage }}
     >
       {children}
     </context.Provider>
