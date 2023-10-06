@@ -53,6 +53,16 @@ exports.getAllFolders = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.deleteFolder = catchAsync(async (req,res, next) => {
+  const folderDelete = await Folder.findByIdAndDelete(req.params.folderId);
+
+  if(!folderDelete) {
+    return res.status(400).json({ status: 'error', message: 'Something went wrong' })
+  }
+
+  res.status(200).json({ status: 'success', message: 'Folder deleted' })
+})
+
 exports.updateFolder = catchAsync(async (req, res, next) => {
   const folder = await Folder.findById(req.params.folderId);
   console.log(req.files);
