@@ -1,5 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteImage, getSavedImages, saveImage } from "../services/images";
+import {
+  deleteImage,
+  getProductImages,
+  getSavedImages,
+  saveImage,
+} from "../services/images";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 export function useGetSavedImages() {
@@ -46,4 +51,13 @@ export function useDeleteImage() {
   });
 
   return { mutate, isLoading };
+}
+
+export function useGetProductImages() {
+  const { data, isLoading } = useQuery({
+    queryKey: ["productImages"],
+    queryFn: getProductImages,
+  });
+
+  return { data, isLoading };
 }

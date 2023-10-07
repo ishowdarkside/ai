@@ -75,7 +75,7 @@ exports.deleteFolder = catchAsync(async (req, res, next) => {
 
 exports.updateFolder = catchAsync(async (req, res, next) => {
   const folder = await Folder.findById(req.params.folderId);
-  console.log(req.files);
+
   for (const file of req.files) {
     if (!file.mimetype.startsWith("image"))
       return next(new AppError(400, "Please provide correct image type"));

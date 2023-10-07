@@ -1,12 +1,20 @@
 import Navbar from "../../utilities/Navbar/Navbar";
 import Modal from "../../utilities/Modal/Modal";
-import { FaTimes } from 'react-icons/fa'
+import { FaTimes } from "react-icons/fa";
 import { useModalContext } from "../../context/ModalContext";
 import styles from "./MyProducts.module.scss";
+import { useGetProductImages } from "../../hooks/useImages";
+import Spinner from "../../utilities/Spinner/Spinner";
+import { deleteImage } from "../../services/images";
+import { useQueryClient } from "@tanstack/react-query";
 
-export default function MyProducts() {  
-  const { isOpenModal, setIsOpenModal, selectedProduct, setSelectedProduct } = useModalContext();
-  const storageImages = JSON.parse(localStorage.getItem("generatedImages")) || [];
+export default function MyProducts() {
+  const { isOpenModal, setIsOpenModal, selectedProduct, setSelectedProduct } =
+    useModalContext();
+
+  const { data, isLoading } = useGetProductImages();
+  const queryClient = useQueryClient();
+  if (isLoading) return <Spinner />;
 
   return (
     <>
@@ -15,12 +23,26 @@ export default function MyProducts() {
         <div className={styles.container}>
           <h1>My Generated Images</h1>
           <div className={styles.gridWrapper}>
-            {storageImages.map((e, i) => (
-              <div className={styles.image} key={i} style={{ backgroundImage: `url(${e})`}}>
-                <div className={styles.deleteImage} onClick={() => {
-                  setIsOpenModal(true)
-                  setSelectedProduct(e)
-                }}><FaTimes /></div>
+            {data.map((e, i) => (
+              <div
+                className={styles.image}
+                style={{
+                  backgroundImage: `url(http://127.0.0.1:3000/${e.imageUrl})`,
+                }}
+                key={i}
+              >
+                <a href={`http://127.0.1:3000/${e.imageUrl}`} download>
+                  DOWNLOAD IMAGE
+                </a>
+                <div
+                  className={styles.deleteImage}
+                  onClick={() => {
+                    setIsOpenModal(true);
+                    setSelectedProduct(e._id);
+                  }}
+                >
+                  <FaTimes />
+                </div>
               </div>
             ))}
           </div>
@@ -30,13 +52,12 @@ export default function MyProducts() {
       {isOpenModal && selectedProduct && (
         <Modal>
           <div className={styles.modalRemoveImage}>
-            <span>
-              Are you sure that you want to delete this image?
-            </span>
+            <span>Are you sure that you want to delete this image?</span>
             <div className={styles.btnWrapper}>
               <button
-                onClick={() => {
-                  localStorage.setItem("generatedImages", JSON.stringify(storageImages.filter(image => image !== selectedProduct)))
+                onClick={async () => {
+                  await deleteImage(selectedProduct);
+                  queryClient.invalidateQueries(["productImages"]);
                   setIsOpenModal(false);
                 }}
               >
@@ -44,7 +65,6 @@ export default function MyProducts() {
               </button>
               <button
                 onClick={() => {
-                  //setSelectedProduct(null);
                   setIsOpenModal(false);
                 }}
               >

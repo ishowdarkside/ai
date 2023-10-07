@@ -65,21 +65,6 @@ const DraggableBox = ({ left, top, children, image, isMoving }) => {
         }}
       >
         <div
-          className={`${styles.resizeNe} ${styles.resizer}`}
-          style={isMoving ? { display: "none" } : {}}
-          onMouseDown={startResize}
-        ></div>
-        <div
-          className={`${styles.resizeNw} ${styles.resizer}`}
-          onMouseDown={startResize}
-          style={isMoving ? { display: "none" } : {}}
-        ></div>
-        <div
-          className={`${styles.resizeSw} ${styles.resizer}`}
-          onMouseDown={startResize}
-          style={isMoving ? { display: "none" } : {}}
-        ></div>
-        <div
           className={`${styles.resizeSe} ${styles.resizer}`}
           onMouseDown={startResize}
           style={isMoving ? { display: "none" } : {}}

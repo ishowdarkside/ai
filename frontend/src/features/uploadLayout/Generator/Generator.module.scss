@@ -88,7 +88,7 @@
       cursor: pointer;
       transition: 0.2s;
       position: absolute;
-      bottom: -5.1rem;
+      bottom: -18rem;
 
       &:hover {
         opacity: 0.8;
@@ -97,7 +97,7 @@
   }
 
   .outputWrapper {
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     width: 50rem;
@@ -147,19 +147,16 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-      to right top,
-      rgba(#ebbdf2, 0.6),
-      rgba(#aaa6f7, 0.6),
-      rgba(#95c1fc, 0.6)
-    );
-
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: "Inter", sans-serif;
-    font-weight: 600;
+    font-weight: 700;
+
+    font-size: 2rem;
+    text-align: center;
+
     letter-spacing: 3px;
   }
 }
@@ -211,4 +208,35 @@
 
   .resizeIcon {
   }
+}
+
+.sizePanelWrapper {
+  position: absolute;
+  width: 100%;
+  bottom: -12rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  span {
+    grid-column: 1 / -1;
+  }
+
+  gap: 1rem;
+  div {
+    padding: 1rem;
+    background-color: #f5f3ff;
+    border: 1px solid #f5f3ff;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+  }
+}
+
+.selected {
+  border-color: #5c27d4 !important;
+}
+
+.isCustom {
+  border-color: #5c27d4 !important;
 }

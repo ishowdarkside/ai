@@ -4,6 +4,10 @@ const MyImagesSchema = new mongoose.Schema({
     type: String,
     required: [true, "please provide image url"],
   },
+  isProductImage: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const myImages = mongoose.model("MyImages", MyImagesSchema);

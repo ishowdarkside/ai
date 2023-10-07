@@ -31,16 +31,14 @@ export async function getSavedImages() {
 
 export async function deleteImage(imageId) {
   try {
-    const res = await fetch(`${BASE_URL}api/images/${imageId}`, {
+    await fetch(`${BASE_URL}api/images/deleteImage/${imageId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
     });
-    const data = await res.json();
-    return data.images;
   } catch (error) {
-    throw new Error(err);
+    throw new Error(error);
   }
 }
 
@@ -62,5 +60,33 @@ export async function resizeProduct(formData) {
     return response.data?.resizedProduct;
   } catch (err) {
     throw new Error(err.response?.data?.message);
+  }
+}
+
+export async function resizeImage(image, width, height) {
+  try {
+    const res = await fetch(`${BASE_URL}api/images/resizeImage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        image,
+        width,
+        height,
+      }),
+    });
+    const data = await res.json();
+    return data.image;
+  } catch (err) {
+    throw new Error(err.response?.data?.message);
+  }
+}
+
+export async function getProductImages() {
+  try {
+    const res = await fetch(`${BASE_URL}api/images/getProductImages`);
+    const data = await res.json();
+    return data.productImages;
+  } catch (err) {
+    throw new Error(err);
   }
 }
