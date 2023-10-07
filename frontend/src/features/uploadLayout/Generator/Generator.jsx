@@ -59,7 +59,7 @@ export default function Generator() {
 
     const b64 = await mergeImages([
       backgroundByte,
-      { src: resizedProduct, x: x * 1.5, y: y * 1.5 },
+      { src: resizedProduct, x: x * 1.6, y: y * 1.6 },
     ]);
 
     const resizedResponse = await resizeImage(
