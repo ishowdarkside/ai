@@ -1,5 +1,6 @@
 import Modal from "../../../utilities/Modal/Modal";
 import { useGeneratorContext } from "../../../context/GeneratorContext";
+import styles from './Generator.module.scss';
 export default function CustomSizeModal() {
   const { setSelectedSize, setIsOpenModal, isOpenModal, setIsCustom } =
     useGeneratorContext();
@@ -7,7 +8,7 @@ export default function CustomSizeModal() {
   if (isOpenModal)
     return (
       <Modal closeBtn={setIsOpenModal} setIsCustom={setIsCustom}>
-        <div>
+        <div className={styles.customSizeModal}>
           <form>
             <input
               type="number"
