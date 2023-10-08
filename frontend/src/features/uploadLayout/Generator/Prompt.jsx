@@ -7,6 +7,7 @@ import { IoMdResize } from "react-icons/io";
 import { useGeneratorContext } from "../../../context/GeneratorContext";
 import { useFileContext } from "../../../context/fileContext";
 import { handleCompose } from "./handleCompose";
+import { useState } from "react";
 
 export default function Prompt() {
   const {
@@ -20,6 +21,7 @@ export default function Prompt() {
     setResizedImage,
     backgroundByte,
     setIsSaved,
+    setBackgroundByte,
   } = useGeneratorContext();
   const {
     image,
@@ -29,6 +31,12 @@ export default function Prompt() {
     positions: { x, y },
     selectedBackground,
   } = useFileContext();
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  const backgroundURL =
+    selectedBackground && selectedBackground.includes("google")
+      ? selectedBackground
+      : `http://127.0.0.1:3000/` + selectedBackground;
 
   return (
     <div className={styles.promptWrapper}>
@@ -40,7 +48,7 @@ export default function Prompt() {
           className={styles.image}
           style={
             backgroundByte && {
-              backgroundImage: `url(${backgroundByte})`,
+              backgroundImage: `url(${backgroundURL})`,
             }
           }
         >
@@ -126,9 +134,10 @@ export default function Prompt() {
         </div>
       </div>
       <button
-        disabled={selectedBackground ? false : true}
-        onClick={() => {
-          handleCompose(
+        disabled={selectedBackground || !isGenerating ? false : true}
+        onClick={async () => {
+          setIsGenerating(true);
+          await handleCompose(
             boxRef,
             file,
             backgroundByte,
@@ -136,13 +145,17 @@ export default function Prompt() {
             x,
             y,
             setResizedImage,
-            selectedBackground
+            selectedBackground,
+            setBackgroundByte
           );
           setIsSaved(false);
+          setIsGenerating(false);
         }}
-        className={styles.generateBtn}
+        className={`${styles.generateBtn} ${
+          isGenerating ? styles.disabledBtn : ""
+        }`}
       >
-        Generate
+        {!isGenerating ? "Generate" : "Generating..."}
       </button>
     </div>
   );
