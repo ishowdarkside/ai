@@ -2,8 +2,8 @@
 .uploudLayout {
   flex-grow: 2;
   display: flex;
-  align-items: center;
   justify-content: center;
+  margin-top: 15rem;
 
   @include responsive-custom(90em) {
     padding: 3rem;

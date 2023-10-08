@@ -24,7 +24,7 @@
   }
 
   .promptWrapper {
-    height: 50rem;
+    height: 40rem;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -50,8 +50,8 @@
       position: relative;
       background-size: cover;
       background-position: center;
-      width: 50rem;
-      height: 50rem;
+      width: 40rem;
+      height: 40rem;
       border: 1px solid #fff;
       overflow: hidden;
       @include responsive-custom(81.25em) {
@@ -100,8 +100,8 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    width: 50rem;
-    height: 50rem;
+    width: 40rem;
+    height: 40rem;
 
     @include responsive-custom(81.25em) {
       width: 40rem;
@@ -162,8 +162,8 @@
 }
 
 .fillPlaceholder {
-  width: 50rem;
-  height: 50rem;
+  width: 40rem;
+  height: 40rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -204,9 +204,6 @@
 
   &:hover {
     opacity: 0.7;
-  }
-
-  .resizeIcon {
   }
 }
 

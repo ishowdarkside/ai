@@ -2,12 +2,12 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import DraggableBox from "../DraggableBox/DraggableBox";
 import { BsArrowsMove } from "react-icons/bs";
-import styles from "./Generator.module.scss";
 import { IoMdResize } from "react-icons/io";
 import { useGeneratorContext } from "../../../context/GeneratorContext";
 import { useFileContext } from "../../../context/fileContext";
 import { handleCompose } from "./handleCompose";
 import { useState } from "react";
+import styles from "./Generator.module.scss";
 
 export default function Prompt() {
   const {
