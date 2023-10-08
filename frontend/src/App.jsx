@@ -12,6 +12,7 @@ import ModalContext from "./context/ModalContext";
 import NotFound from "./pages/NotFound/NotFound";
 import MyProducts from "./pages/MyProducts/MyProducts";
 import GeneratorContext from "./context/GeneratorContext";
+import AiPromptContext from "./context/AiPromptContext";
 function App() {
   const queryClient = new QueryClient();
   return (
@@ -21,31 +22,17 @@ function App() {
           <Route
             path="/"
             element={
-              <GeneratorContext>
-                <ModalContext>
-                  <FileContext>
-                    <FolderContext>
-                      <Home />
-                    </FolderContext>
-                  </FileContext>
-                </ModalContext>
-              </GeneratorContext>
-            }
-          />
-          <Route
-            path="/ai-prompt"
-            element={
-              <PromptContext>
-                <AiPrompt />
-              </PromptContext>
-            }
-          />
-          <Route
-            path="/myImages"
-            element={
-              <ModalContext>
-                <MyImages />
-              </ModalContext>
+              <AiPromptContext>
+                <GeneratorContext>
+                  <ModalContext>
+                    <FileContext>
+                      <FolderContext>
+                        <Home />
+                      </FolderContext>
+                    </FileContext>
+                  </ModalContext>
+                </GeneratorContext>
+              </AiPromptContext>
             }
           />
           <Route

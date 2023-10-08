@@ -90,3 +90,46 @@ export async function getProductImages() {
     throw new Error(err);
   }
 }
+
+export async function convertToByte(imageUrl) {
+  const res = await fetch(`${BASE_URL}api/images/convertToByte`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      imageUrl,
+    }),
+  });
+
+  const data = await res.json();
+  return data;
+}
+
+export async function saveProductImage(imageBase64) {
+  try {
+    const res = await fetch(`${BASE_URL}api/images/saveProductImage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ imageBase64 }),
+    });
+    const data = await res.json();
+    console.log(data);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function saveAiImage(imageUrl) {
+  try {
+    const res = await fetch(`${BASE_URL}api/images/saveAiImage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        url: imageUrl,
+      }),
+    });
+    const data = await res.json();
+    console.log(data);
+  } catch (err) {
+    console.log(err);
+  }
+}

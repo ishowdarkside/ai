@@ -6,6 +6,7 @@ import { useGeneratorContext } from "../../../context/GeneratorContext";
 import Output from "./Output";
 import CustomSizeModal from "./CustomSizeModal";
 import { convertByte } from "./convertByte";
+import AiPrompt from "./AiPrompt/AiPrompt";
 
 export default function Generator() {
   const { selectedBackground } = useFileContext();
@@ -21,6 +22,7 @@ export default function Generator() {
       <div className={styles.generator}>
         <div className={styles.panelsWrapper}>
           <Prompt />
+          <AiPrompt />
           <Output />
         </div>
       </div>

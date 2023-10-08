@@ -25,7 +25,7 @@ export async function handleCompose(
 
   const b64 = await mergeImages([
     backgroundByte,
-    { src: resizedProduct, x: x * 1.5, y: y * 1.5 },
+    { src: resizedProduct, x: x * 2.2, y: y * 2.2 },
   ]);
 
   const resizedResponse = await resizeImage(

@@ -240,3 +240,34 @@
 .isCustom {
   border-color: #5c27d4 !important;
 }
+
+.operationWrapper {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  button {
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    background-color: #5c27d4;
+    color: #fff;
+    font-size: 1.4rem;
+    padding: 1rem;
+    cursor: pointer;
+  }
+  a {
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    background-color: #5c27d4;
+    color: #fff;
+    padding: 1rem;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1.4rem;
+    cursor: pointer;
+  }
+  & > * {
+    flex-grow: 1;
+  }
+}

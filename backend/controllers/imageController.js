@@ -90,28 +90,9 @@ exports.resizeImage = catchAsync(async (req, res, next) => {
     })
     .toBuffer();
 
-  const uniqueIdentifier = uuid();
-
   const resizedImage = data.toString("base64");
 
   //save-aj image i saaveaj u bazu kao productImage
-  await myImages.create({
-    imageUrl: `${uniqueIdentifier}.jpeg`,
-    isProductImage: true,
-  });
-  fs.writeFile(
-    `public/${uniqueIdentifier}.jpeg`,
-    resizedImage,
-    "base64",
-    (err) => {
-      if (err) {
-        console.error(err);
-        res.status(500).send("Error saving the image.");
-      } else {
-        console.log("Image saved successfully.");
-      }
-    }
-  );
 
   return res.status(200).json({
     status: "success",
@@ -137,5 +118,69 @@ exports.getProductImages = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: "success",
     productImages,
+  });
+});
+
+exports.convertToByte = catchAsync(async (req, res, next) => {
+  const { imageUrl } = req.body;
+
+  // Fetch the image using Axios
+  const imageResponse = await axios.get(imageUrl, {
+    responseType: "arraybuffer",
+  });
+
+  // Convert the image data to bytes
+  const imageBase64 = Buffer.from(imageResponse.data, "binary").toString(
+    "base64"
+  );
+
+  res.status(200).json({
+    status: "success",
+    imageBase64: "data:image/png;base64," + imageBase64,
+  });
+});
+
+exports.saveProductImage = catchAsync(async (req, res, next) => {
+  const { imageBase64 } = req.body;
+  const Base64 = imageBase64.replace(/^data:image\/\w+;base64,/, "");
+  const uniqueIdentifier = uuid();
+  await myImages.create({
+    imageUrl: `${uniqueIdentifier}.jpeg`,
+    isProductImage: true,
+  });
+  fs.writeFile(`public/${uniqueIdentifier}.jpeg`, Base64, "base64", (err) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ message: "Error saving the image." });
+    } else {
+      console.log("Image saved successfully.");
+    }
+  });
+
+  res.status(200).json({
+    status: "success",
+    message: "Product image saved successfully!",
+  });
+});
+
+exports.saveAiImage = catchAsync(async (req, res, next) => {
+  const { url } = req.body;
+
+  const aiFolder = await Folder.findOne({ name: "AI Generated images" });
+  const response = await axios.get(url, { responseType: "arraybuffer" });
+
+  const uniqueIdentifier = uuid();
+  await sharp(response.data)
+    .resize(1024, 1024)
+    .toFormat("jpeg")
+    .jpeg({ quality: 90 })
+    .toFile(`public/${uniqueIdentifier}.jpeg`);
+
+  aiFolder.images.push(`${uniqueIdentifier}.jpeg`);
+
+  await aiFolder.save({ validateBeforeSave: false });
+  res.status(200).json({
+    status: "success",
+    message: "Image saved successfully!",
   });
 });

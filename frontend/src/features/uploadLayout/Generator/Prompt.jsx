@@ -19,6 +19,7 @@ export default function Prompt() {
     setIsCustom,
     setResizedImage,
     backgroundByte,
+    setIsSaved,
   } = useGeneratorContext();
   const {
     image,
@@ -38,8 +39,8 @@ export default function Prompt() {
         <div
           className={styles.image}
           style={
-            selectedBackground && {
-              backgroundImage: `url(http://127.0.0.1:3000/${selectedBackground})`,
+            backgroundByte && {
+              backgroundImage: `url(${backgroundByte})`,
             }
           }
         >
@@ -126,7 +127,7 @@ export default function Prompt() {
       </div>
       <button
         disabled={selectedBackground ? false : true}
-        onClick={() =>
+        onClick={() => {
           handleCompose(
             boxRef,
             file,
@@ -134,9 +135,11 @@ export default function Prompt() {
             selectedSize,
             x,
             y,
-            setResizedImage
-          )
-        }
+            setResizedImage,
+            selectedBackground
+          );
+          setIsSaved(false);
+        }}
         className={styles.generateBtn}
       >
         Generate

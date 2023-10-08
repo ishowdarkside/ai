@@ -9,6 +9,7 @@ export default function GeneratorContext({ children }) {
   const [selectedSize, setSelectedSize] = useState({ width: 800, height: 800 });
   const [resizedImage, setResizedImage] = useState(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
   const [isCustom, setIsCustom] = useState(false);
   return (
     <context.Provider
@@ -25,6 +26,8 @@ export default function GeneratorContext({ children }) {
         setIsOpenModal,
         isCustom,
         setIsCustom,
+        isSaved,
+        setIsSaved,
       }}
     >
       {children}

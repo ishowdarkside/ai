@@ -1,0 +1,65 @@
+.aiPrompWrapper {
+  flex-grow: 0.6;
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    textarea {
+      padding: 1rem;
+      resize: none;
+      height: 10rem;
+      border-radius: 6px;
+      outline: none;
+    }
+
+    button {
+      padding: 1rem;
+      border: none;
+      outline: none;
+      background-color: #6d28d9;
+      color: #ffff;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+  }
+}
+
+.outputWrapper {
+  margin-top: 1rem;
+
+  div {
+    border-radius: 1rem;
+    height: 11.5rem;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    background-color: #d4d4d4;
+
+    &:hover button {
+      display: block;
+    }
+    button {
+      cursor: pointer;
+      background-color: #6d28d9;
+      border: none;
+      outline: none;
+      color: #fff;
+      position: absolute;
+      padding: 1rem;
+      border-radius: 6px;
+      transform: translateX(-50%);
+      width: 100%;
+      left: 50%;
+      bottom: 0;
+      display: none;
+    }
+  }
+  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.spinnerWrapper {
+  position: relative;
+  height: 15rem;
+}
