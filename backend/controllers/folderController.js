@@ -28,7 +28,7 @@ exports.createFolder = catchAsync(async (req, res, next) => {
       .join("")}-${Date.now()}.jpeg`;
     try {
       await sharp(file.buffer)
-        .resize(800, 800)
+        .resize(1024, 1024)
         .toFormat("jpeg")
         .jpeg({ quality: 90 })
         .toFile(`public/${filename}`);
@@ -84,7 +84,7 @@ exports.updateFolder = catchAsync(async (req, res, next) => {
       .join("")}-${Date.now()}.jpeg`;
     try {
       await sharp(file.buffer)
-        .resize(800, 800)
+        .resize(1024, 1024)
         .toFormat("jpeg")
         .jpeg({ quality: 90 })
         .toFile(`public/${filename}`);
