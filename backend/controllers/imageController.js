@@ -63,8 +63,8 @@ exports.resizeProduct = catchAsync(async (req, res, next) => {
   const { width: productWidth, height: productHeight } = req.body;
   const data = await sharp(req.file.buffer)
     .resize({
-      width: parseInt(productWidth * 1.8),
-      height: parseInt(productHeight * 1.8),
+      width: parseInt(productWidth * 2.5),
+      height: parseInt(productHeight * 2.5),
       fit: "inside",
     })
     .toBuffer();
