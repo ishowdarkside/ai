@@ -47,7 +47,7 @@ export default function Prompt() {
         <div
           className={styles.image}
           style={
-            backgroundByte && {
+            backgroundURL && {
               backgroundImage: `url(${backgroundURL})`,
             }
           }

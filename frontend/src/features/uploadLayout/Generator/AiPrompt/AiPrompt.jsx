@@ -15,17 +15,17 @@ export default function AiPrompt() {
     setInput("");
     setNegativePrompt("");
     setIsGenerating(true);
-    const [res1, res2, res3] = await Promise.all([
+    const [res1 /*, res2, res3*/] = await Promise.all([
       prompt(input),
-      prompt(input),
-      prompt(input),
+      /* prompt(input),
+      prompt(input),*/
     ]);
 
     setAiImages((curr) => [
       ...curr,
       ...res1.data.output,
-      ...res2.data.output,
-      ...res3.data.output,
+      /* ...res2.data.output,
+      ...res3.data.output,*/
     ]);
     setIsGenerating(false);
   }
