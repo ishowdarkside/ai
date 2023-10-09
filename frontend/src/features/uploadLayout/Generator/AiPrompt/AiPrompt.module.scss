@@ -29,9 +29,10 @@
 
   div {
     border-radius: 1rem;
-    height: 11.5rem;
+    height: 15rem;
     background-size: cover;
-    background-position: center;
+    background-repeat: no-repeat;
+    background-position: bottom;
     position: relative;
     background-color: #d4d4d4;
     cursor: pointer;
