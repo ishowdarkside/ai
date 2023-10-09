@@ -4,7 +4,7 @@ import { createContext, useContext, useState } from "react";
 const context = createContext();
 
 export default function AiPromptContext({ children }) {
-  const [aiImages, setAiImages] = useState(null);
+  const [aiImages, setAiImages] = useState([]);
   const [isGenerating, setIsGenerating] = useState(false);
   return (
     <context.Provider

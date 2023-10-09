@@ -12,7 +12,7 @@ export default function AiOutput() {
         <Spinner />
       </div>
     );
-  if (aiImages && !isGenerating)
+  if (aiImages.length > 0 && !isGenerating)
     return (
       <div className={styles.outputWrapper}>
         {aiImages.map((image, i) => (
