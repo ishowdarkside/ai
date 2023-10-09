@@ -1,5 +1,5 @@
 const BASE_URL = `https://api.claid.ai/v1-beta1/image/generate`;
-const API_KEY = "b26a695527364a77acb0c771fc06e88e";
+const API_KEY = "9b97e61fa19344538f8efdbb8cca9883";
 
 export async function prompt(promptInput) {
   try {
