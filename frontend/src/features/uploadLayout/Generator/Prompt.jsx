@@ -8,6 +8,7 @@ import { useFileContext } from "../../../context/fileContext";
 import { handleCompose } from "./handleCompose";
 import { useState } from "react";
 import styles from "./Generator.module.scss";
+import { convertByte } from "./convertByte";
 
 export default function Prompt() {
   const {
@@ -19,7 +20,6 @@ export default function Prompt() {
     setIsOpenModal,
     setIsCustom,
     setResizedImage,
-    backgroundByte,
     setIsSaved,
     setBackgroundByte,
   } = useGeneratorContext();
@@ -136,11 +136,14 @@ export default function Prompt() {
       <button
         disabled={selectedBackground || !isGenerating ? false : true}
         onClick={async () => {
+          if (!selectedBackground) return;
           setIsGenerating(true);
+          const base64 = await convertByte(selectedBackground);
+          setBackgroundByte(base64);
           await handleCompose(
             boxRef,
             file,
-            backgroundByte,
+            base64,
             selectedSize,
             x,
             y,

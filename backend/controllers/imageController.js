@@ -127,7 +127,7 @@ exports.convertToByte = catchAsync(async (req, res, next) => {
   // Fetch the image using Axios
   const axiosUrl = imageUrl.includes("googleapis")
     ? imageUrl
-    : `${req.protocol}://${req.hostname}:3000/${imageUrl}`;
+    : `${req.protocol}://${req.hostname}/${imageUrl}`;
   //u developmentu dodati port 3000
   const imageResponse = await axios.get(axiosUrl, {
     responseType: "arraybuffer",

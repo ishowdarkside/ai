@@ -1,6 +1,5 @@
 import mergeImages from "merge-images";
 import { resizeProduct, resizeImage } from "../../../services/images";
-import { convertByte } from "./convertByte";
 
 export async function handleCompose(
   boxRef,
@@ -9,12 +8,8 @@ export async function handleCompose(
   selectedSize,
   x,
   y,
-  setResizedImage,
-  selectedBackground,
-  setBackgroundByte
+  setResizedImage
 ) {
-  await convertByte(selectedBackground, setBackgroundByte);
-
   const productWidth = boxRef.current.getBoundingClientRect().width;
   const productHeight = boxRef.current.getBoundingClientRect().height;
 
