@@ -10,10 +10,11 @@ const axios = require("axios");
 const fs = require("fs");
 const myImages = require(path.join(__dirname, "..", "models", "MyImages"));
 const Folder = require(path.join(__dirname, "..", "models", "Folder"));
-const publicFolderPath = path.join(__dirname, "..", "public");
 const { v4: uuid } = require("uuid");
 const sharp = require("sharp");
 const fsPromises = require("fs").promises;
+const imgBBAPIKey = "873dd749a4cc7aa390156591a973a786";
+const imgbbUploader = require("imgbb-uploader");
 
 exports.saveImage = catchAsync(async (req, res, next) => {
   const { imageUrl: imageArray } = req.body;
@@ -70,17 +71,24 @@ exports.resizeProduct = catchAsync(async (req, res, next) => {
     .toBuffer();
   const resizedImage = data.toString("base64");
 
-  //ubaciti funkcionlanost da se slika save-a na backend
+  const options = {
+    apiKey: imgBBAPIKey,
+    base64string: resizedImage,
+    expiration: 300,
+  };
+
+  const uploadResponse = await imgbbUploader(options);
+
+  //ubaciti ai ovdje
   res.status(200).json({
     status: "success",
     message: "Image saved successfully!",
-    resizedProduct: "data:image/png;base64," + resizedImage,
+    resizedProduct: uploadResponse.image.url,
   });
 });
 
 exports.resizeImage = catchAsync(async (req, res, next) => {
   const { image } = req.body;
-
   const imageBase64 = image.replace(/^data:image\/\w+;base64,/, "");
   const buffer = Buffer.from(imageBase64, "base64");
   const { width: productWidth, height: productHeight } = req.body;
