@@ -13,7 +13,7 @@ export default function Generator() {
   const { setBackgroundByte } = useGeneratorContext();
 
   useEffect(() => {
-    if (!selectedBackground) return;
+    if (!selectedBackground || selectedBackground.includes("googleapi")) return;
     convertByte(selectedBackground, setBackgroundByte);
   }, [selectedBackground, setBackgroundByte]);
 

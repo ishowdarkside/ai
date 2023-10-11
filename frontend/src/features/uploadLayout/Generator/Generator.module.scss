@@ -24,6 +24,7 @@
   }
 
   .promptWrapper {
+    background-image: url("../../../assets/transparent_image_bg.jpg");
     height: 40rem;
     position: relative;
     display: flex;
@@ -281,7 +282,6 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  
 
   form {
     width: 40rem;
@@ -294,7 +294,7 @@
       outline: none;
       border: 1px solid #ddd;
     }
-  
+
     button {
       width: 100%;
       padding: 1rem;
@@ -305,12 +305,11 @@
       font-family: Montserrat;
       border: 0;
       border-radius: 6px;
-      transition: .2s;
+      transition: 0.2s;
 
       &:hover {
         opacity: 0.7;
       }
     }
   }
-
 }

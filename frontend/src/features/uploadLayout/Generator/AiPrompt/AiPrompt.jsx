@@ -9,13 +9,24 @@ export default function AiPrompt() {
   const { setAiImages, isGenerating, setIsGenerating } = useAiPromptContext();
 
   async function handleGenerate(e) {
+    setAiImages([]);
     e.preventDefault();
     if (!input) return;
     setInput("");
     setNegativePrompt("");
     setIsGenerating(true);
-    const res = await prompt(input);
-    setAiImages(res.data.output);
+    const [res1 /*, res2, res3*/] = await Promise.all([
+      prompt(input),
+      /* prompt(input),
+      prompt(input),*/
+    ]);
+
+    setAiImages((curr) => [
+      ...curr,
+      ...res1.data.output,
+      /* ...res2.data.output,
+      ...res3.data.output,*/
+    ]);
     setIsGenerating(false);
   }
   return (
