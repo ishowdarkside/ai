@@ -6,7 +6,6 @@ import { resizeProduct } from "./resizeProduct";
 
 export default function Prompt() {
   const {
-    image,
     setFile,
     boxRef,
     positions: { x, y },

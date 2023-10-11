@@ -48,9 +48,23 @@ export async function updateFolder(folderId, formData) {
       `${BASE_URL}api/folders/${folderId}`,
       formData,
       { headers: { "Content-Type": "multipart/form-data" } }
-      );
-      return response.data;
+    );
+    return response.data;
   } catch (err) {
     throw new Error(err.response?.data?.message);
   }
+}
+
+export async function renameImage(folderId, prevImgName, newImgName) {
+  const res = await fetch(`${BASE_URL}api/folders/renameImage/${folderId}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      prevImgName,
+      newImgName,
+    }),
+  });
+
+  const data = await res.json();
+  console.log(data);
 }

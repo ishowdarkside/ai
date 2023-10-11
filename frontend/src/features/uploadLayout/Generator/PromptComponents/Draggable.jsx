@@ -17,7 +17,7 @@ export default function Draggable() {
           className={styles.image}
           style={
             selectedBackground && {
-              backgroundImage: `url(${selectedBackground})`,
+              backgroundImage: `url(http://127.0.0.1:3000/${selectedBackground})`,
             }
           }
         >

@@ -100,3 +100,16 @@ exports.updateFolder = catchAsync(async (req, res, next) => {
     message: "Updated folder successfully!",
   });
 });
+
+exports.renameImage = catchAsync(async (req, res, next) => {
+  const { prevImgName, newImgName } = req.body;
+  const folder = await Folder.findById(req.params.folderId);
+  const index = folder.images.findIndex((el) => el === prevImgName);
+  folder.images.splice(index, 1, `${newImgName}.jpeg`);
+  await fsPromises.rename(`public/${prevImgName}`, `public/${newImgName}.jpeg`);
+  await folder.save();
+  res.status(200).json({
+    status: "success",
+    message: "Image name updated successfully!",
+  });
+});

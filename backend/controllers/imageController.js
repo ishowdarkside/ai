@@ -79,7 +79,6 @@ exports.resizeProduct = catchAsync(async (req, res, next) => {
 
   const uploadResponse = await imgbbUploader(options);
 
-  //ubaciti ai ovdje
   res.status(200).json({
     status: "success",
     message: "Image saved successfully!",
