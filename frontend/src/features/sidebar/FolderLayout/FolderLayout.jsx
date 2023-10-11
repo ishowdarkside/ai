@@ -19,6 +19,7 @@ export default function FolderLayout() {
 		const formData = new FormData();
 		const photoArr = Array.from(files);
 		photoArr.forEach((f) => formData.append('photos', f));
+		console.log(photoArr)
 		mutate(
 			{ id: activeFolder._id, formData },
 			{
@@ -58,7 +59,7 @@ export default function FolderLayout() {
         <span className={styles.emptySpan}>Empty folder. Start adding images</span>
         )}
 			<div className={styles.folder_layout}>
-				{activeFolder.images.map((item, index) => <ImageCard data={item} key={index} />)}
+				{activeFolder.images.map((item, index) => <ImageCard folderId={activeFolder._id} data={item} key={index} />)}
 			</div>
 		</div>
 	);

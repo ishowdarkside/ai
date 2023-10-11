@@ -3,7 +3,6 @@ import OutputPanel from "../../features/AiPrompt/OutputPanel/OutputPanel";
 import PromptForm from "../../features/AiPrompt/PromptForm/PromptForm";
 import Navbar from "../../utilities/Navbar/Navbar";
 import styles from "./AiPrompt.module.scss";
-import { useNavigate } from "react-router-dom";
 import { useSaveImages } from "../../hooks/useImages";
 import Spinner from "../../utilities/Spinner/Spinner";
 export default function AiPrompt() {

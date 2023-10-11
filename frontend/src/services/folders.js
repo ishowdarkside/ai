@@ -48,8 +48,8 @@ export async function updateFolder(folderId, formData) {
       `${BASE_URL}api/folders/${folderId}`,
       formData,
       { headers: { "Content-Type": "multipart/form-data" } }
-    );
-    return response.data;
+      );
+      return response.data;
   } catch (err) {
     throw new Error(err.response?.data?.message);
   }

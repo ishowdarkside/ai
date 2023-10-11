@@ -18,7 +18,6 @@ export async function prompt(promptInput) {
     });
 
     const data = await res.json();
-
     return data;
   } catch (err) {
     console.log(err);
