@@ -1,78 +1,82 @@
-import { useEffect, useState } from "react";
-import Draggable from "react-draggable";
-import styles from "./DraggableBox.module.scss";
-import { useFileContext } from "../../../context/fileContext";
+import React, { useState } from 'react';
+import { useFileContext } from '../../../context/fileContext';
+import styles from './DraggableBox.module.scss';
 
-// eslint-disable-next-line react/prop-types
-const DraggableBox = ({ left, top, children, image, isMoving }) => {
-  const [dimensions, setDimensions] = useState({ width: 200, height: 200 });
-  const [isResizing, setResizing] = useState(false);
+const DraggableBox = ({ image }) => {
+	const [ isDragging, setIsDragging ] = useState(false);
+	const [ isResizing, setIsResizing ] = useState(false);
+	const [ initialPos, setInitialPos ] = useState({ x: 0, y: 0 });
+  const { boxRef } = useFileContext();
+	const [ rect, setRect ] = useState({
+		top: 100,
+		left: 100,
+		width: 200,
+		height: 200
+	});
 
-  const { setPositions, boxRef } = useFileContext();
+	function handleMouseDown(e) {
+		e.preventDefault();
+		const { clientX, clientY } = e;
 
-  const handleDrag = (e, ui) => {
-    if (!isMoving) return;
-    const { x, y } = ui;
-    setPositions({ x, y });
-  };
+		setInitialPos({ x: clientX, y: clientY });
 
-  const startResize = () => {
-    // setIsMoving(false);
-    setResizing(true);
-  };
+		const resizerClass = e.target.className;
+		if (resizerClass.includes('resizer')) {
+			setIsResizing(true);
+		} else {
+			setIsDragging(true);
+		}
+	};
 
-  const stopResize = () => {
-    // setIsMoving(true);
-    setResizing(false);
-  };
+	function handleMouseMove(e) {
+		if (isDragging || isResizing) {
+			const { clientX, clientY } = e;
 
-  useEffect(() => {
-    document.addEventListener("mousemove", resize);
-    document.addEventListener("mouseup", stopResize);
-    return () => {
-      document.removeEventListener("mousemove", resize);
-      document.removeEventListener("mouseup", stopResize);
-    };
+			const deltaX = clientX - initialPos.x;
+			const deltaY = clientY - initialPos.y;
 
-    function resize(e) {
-      if (isResizing && !isMoving) {
-        const newWidth =
-          e.clientX - boxRef.current.getBoundingClientRect().left;
-        const newHeight =
-          e.clientY - boxRef.current.getBoundingClientRect().top;
+			if (isResizing) {
+				setRect((prevRect) => ({
+					...prevRect,
+					width: Math.max(prevRect.width + deltaX, 50),
+					height: Math.max(prevRect.height + deltaY, 50)
+				}));
+			} else if (isDragging) {
+				setRect((prevRect) => ({
+					...prevRect,
+					left: prevRect.left + deltaX,
+					top: prevRect.top + deltaY
+				}));
+			}
 
-        if (newWidth > 500 || newHeight > 500) return;
-        setDimensions({ width: newWidth, height: newHeight });
-      }
-    }
-  }, [isResizing, isMoving, boxRef]);
+			setInitialPos({ x: clientX, y: clientY });
+		}
+	};
 
-  return (
-    <Draggable
-      defaultPosition={{ x: left, y: top }}
-      bounds="parent"
-      nodeRef={boxRef}
-      onDrag={handleDrag}
-      disabled={!isMoving}
-    >
-      <div
-        ref={boxRef}
-        className={styles.draggableImage}
-        style={{
-          backgroundImage: `url(${image})`,
-          width: dimensions.width,
-          height: dimensions.height,
-        }}
-      >
-        <div
-          className={`${styles.resizeSe} ${styles.resizer}`}
-          onMouseDown={startResize}
-          style={isMoving ? { display: "none" } : {}}
-        ></div>{" "}
-        {children}
-      </div>
-    </Draggable>
-  );
+	function handleMouseUp() {
+		setIsDragging(false);
+		setIsResizing(false);
+	};
+
+	return (
+		<div
+			ref={boxRef}
+      className={styles.draggableImage}
+			style={{
+				background: `url(${image})`,
+				width: rect.width + 'px',
+				height: rect.height + 'px',
+				top: rect.top + 'px',
+				left: rect.left + 'px',
+			}}
+			onMouseDown={handleMouseDown}
+			onMouseMove={handleMouseMove}
+			onMouseUp={handleMouseUp}
+			onMouseLeave={handleMouseUp}
+		>
+			<div className={`${styles.resizeSe} ${styles.resizer}`} />
+		</div>
+	);
 };
 
 export default DraggableBox;

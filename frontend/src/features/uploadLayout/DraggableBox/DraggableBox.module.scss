@@ -1,7 +1,7 @@
 .draggableImage {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
   position: absolute;
   border: 1px solid rgba(212, 20, 155, 0.5);
   cursor: move;

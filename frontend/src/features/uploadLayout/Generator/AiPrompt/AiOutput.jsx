@@ -5,6 +5,8 @@ import OutputElement from "./OutputElement";
 export default function AiOutput() {
   const { aiImages } = useAiPromptContext();
 
+  console.log(aiImages)
+
   const { isGenerating } = useAiPromptContext();
   if (isGenerating)
     return (
