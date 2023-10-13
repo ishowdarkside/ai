@@ -10,6 +10,10 @@ export default function FileContext({ children }) {
   const [selectedBackground, setSelectedBackground] = useState(null);
   const [positions, setPositions] = useState({});
   const boxRef = useRef(null);
+  const resizeSeRef = useRef(null);
+  const resizeNeRef = useRef(null);
+  const resizeSwRef = useRef(null);
+  const resizeNwRef = useRef(null);
   return (
     <context.Provider
       value={{
@@ -22,6 +26,10 @@ export default function FileContext({ children }) {
         selectedBackground,
         setSelectedBackground,
         boxRef,
+        resizeSeRef,
+        resizeNeRef,
+        resizeSwRef,
+        resizeNwRef
       }}
     >
       {children}

@@ -5,8 +5,9 @@ import styles from './DraggableBox.module.scss';
 const DraggableBox = ({ image }) => {
 	const [ isDragging, setIsDragging ] = useState(false);
 	const [ isResizing, setIsResizing ] = useState(false);
+	const [ resizeOption, setResizeOption ] = useState('');
 	const [ initialPos, setInitialPos ] = useState({ x: 0, y: 0 });
-  const { boxRef } = useFileContext();
+	const { boxRef, resizeSeRef, resizeNeRef, resizeSwRef, resizeNwRef } = useFileContext();
 	const [ rect, setRect ] = useState({
 		top: 100,
 		left: 100,
@@ -17,30 +18,57 @@ const DraggableBox = ({ image }) => {
 	function handleMouseDown(e) {
 		e.preventDefault();
 		const { clientX, clientY } = e;
-
 		setInitialPos({ x: clientX, y: clientY });
-
+	
 		const resizerClass = e.target.className;
+		setResizeOption(getResizeOption(resizerClass));
+	
 		if (resizerClass.includes('resizer')) {
 			setIsResizing(true);
 		} else {
 			setIsDragging(true);
 		}
-	};
-
+	}
+	
+	function getResizeOption(className) {
+		if (className.includes('resizeSe')) return 'bottom-right';
+		if (className.includes('resizeNe')) return 'top-right';
+		if (className.includes('resizeNw')) return 'top-left';
+		if (className.includes('resizeSw')) return 'bottom-left';
+		return 'none'; // or any other default value
+	}
+	
 	function handleMouseMove(e) {
 		if (isDragging || isResizing) {
 			const { clientX, clientY } = e;
-
+	
 			const deltaX = clientX - initialPos.x;
 			const deltaY = clientY - initialPos.y;
-
+	
 			if (isResizing) {
-				setRect((prevRect) => ({
-					...prevRect,
-					width: Math.max(prevRect.width + deltaX, 50),
-					height: Math.max(prevRect.height + deltaY, 50)
-				}));
+				setRect((prevRect) => {
+					const { width, height, left, top } = prevRect;
+					let newWidth = width;
+					let newHeight = height;
+					let newLeft = left;
+					let newTop = top;
+	
+					if (resizeOption.includes('left')) {
+						newWidth = Math.max(width - deltaX, 50);
+						newLeft = left + (width - newWidth);
+					} else {
+						newWidth = Math.max(width + deltaX, 50);
+					}
+	
+					if (resizeOption.includes('top')) {
+						newHeight = Math.max(height - deltaY, 50);
+						newTop = top + (height - newHeight);
+					} else {
+						newHeight = Math.max(height + deltaY, 50);
+					}
+	
+					return { width: newWidth, height: newHeight, left: newLeft, top: newTop };
+				});
 			} else if (isDragging) {
 				setRect((prevRect) => ({
 					...prevRect,
@@ -48,33 +76,37 @@ const DraggableBox = ({ image }) => {
 					top: prevRect.top + deltaY
 				}));
 			}
-
+	
 			setInitialPos({ x: clientX, y: clientY });
 		}
-	};
+	}
 
 	function handleMouseUp() {
 		setIsDragging(false);
 		setIsResizing(false);
-	};
+		setResizeOption('')
+	}
 
 	return (
 		<div
 			ref={boxRef}
-      className={styles.draggableImage}
+			className={styles.draggableImage}
 			style={{
 				background: `url(${image})`,
 				width: rect.width + 'px',
 				height: rect.height + 'px',
 				top: rect.top + 'px',
-				left: rect.left + 'px',
+				left: rect.left + 'px'
 			}}
 			onMouseDown={handleMouseDown}
 			onMouseMove={handleMouseMove}
 			onMouseUp={handleMouseUp}
 			onMouseLeave={handleMouseUp}
 		>
-			<div className={`${styles.resizeSe} ${styles.resizer}`} />
+			<div className={`${styles.resizeSe} ${styles.resizer}`} ref={resizeSeRef} />
+			<div className={`${styles.resizeNe} ${styles.resizer}`} ref={resizeNeRef} />
+			<div className={`${styles.resizeSw} ${styles.resizer}`} ref={resizeSwRef} />
+			<div className={`${styles.resizeNw} ${styles.resizer}`} ref={resizeNwRef} />
 		</div>
 	);
 };

@@ -15,8 +15,8 @@
 }
 .resizeNw {
   top: -1px;
-  border-top: 2px solid rgb(212, 20, 155);
-  border-left: 2px solid rgb(212, 20, 155);
+  border-top: 3px solid rgb(212, 20, 155);
+  border-left: 3px solid rgb(212, 20, 155);
 
   left: -1px;
   cursor: nw-resize;
@@ -26,23 +26,22 @@
   top: -1px;
   right: -1px;
   cursor: ne-resize;
-  border-top: 2px solid rgb(212, 20, 155);
-  border-right: 2px solid rgb(212, 20, 155);
+  border-top: 3px solid rgb(212, 20, 155);
+  border-right: 3px solid rgb(212, 20, 155);
 }
 
 .resizeSw {
   bottom: -1px;
   left: -1px;
   cursor: sw-resize;
-  border-left: 2px solid rgb(212, 20, 155);
-  border-bottom: 2px solid rgb(212, 20, 155);
+  border-left: 3px solid rgb(212, 20, 155);
+  border-bottom: 3px solid rgb(212, 20, 155);
 }
 
 .resizeSe {
   bottom: -1px;
   right: -1px;
   cursor: se-resize;
-
-  border-right: 6px solid rgb(255, 255, 255);
-  border-bottom: 6px solid rgb(255, 255, 255);
+  border-right: 3px solid rgb(212, 20, 155);
+  border-bottom: 3px solid rgb(212, 20, 155);
 }
