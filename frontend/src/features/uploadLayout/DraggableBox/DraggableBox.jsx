@@ -6,8 +6,7 @@ const DraggableBox = ({ image }) => {
 	const [ isDragging, setIsDragging ] = useState(false);
 	const [ isResizing, setIsResizing ] = useState(false);
 	const [ resizeOption, setResizeOption ] = useState('');
-	const [ initialPos, setInitialPos ] = useState({ x: 0, y: 0 });
-	const { boxRef, resizeSeRef, resizeNeRef, resizeSwRef, resizeNwRef } = useFileContext();
+	const { boxRef, resizeSeRef, resizeNeRef, resizeSwRef, resizeNwRef, setPositions, positions } = useFileContext();
 	const [ rect, setRect ] = useState({
 		top: 100,
 		left: 100,
@@ -18,7 +17,7 @@ const DraggableBox = ({ image }) => {
 	function handleMouseDown(e) {
 		e.preventDefault();
 		const { clientX, clientY } = e;
-		setInitialPos({ x: clientX, y: clientY });
+		setPositions({ x: clientX, y: clientY });
 	
 		const resizerClass = e.target.className;
 		setResizeOption(getResizeOption(resizerClass));
@@ -42,8 +41,8 @@ const DraggableBox = ({ image }) => {
 		if (isDragging || isResizing) {
 			const { clientX, clientY } = e;
 	
-			const deltaX = clientX - initialPos.x;
-			const deltaY = clientY - initialPos.y;
+			const deltaX = clientX - positions.x;
+			const deltaY = clientY - positions.y;
 	
 			if (isResizing) {
 				setRect((prevRect) => {
@@ -77,14 +76,16 @@ const DraggableBox = ({ image }) => {
 				}));
 			}
 	
-			setInitialPos({ x: clientX, y: clientY });
+			setPositions({ x: clientX, y: clientY });
 		}
 	}
 
 	function handleMouseUp() {
-		setIsDragging(false);
-		setIsResizing(false);
-		setResizeOption('')
+		boxRef.current.addEventListener('mouseleave', () => {
+			setIsDragging(false);
+			setIsResizing(false);
+			setResizeOption('')
+		})
 	}
 
 	return (
@@ -101,7 +102,6 @@ const DraggableBox = ({ image }) => {
 			onMouseDown={handleMouseDown}
 			onMouseMove={handleMouseMove}
 			onMouseUp={handleMouseUp}
-			onMouseLeave={handleMouseUp}
 		>
 			<div className={`${styles.resizeSe} ${styles.resizer}`} ref={resizeSeRef} />
 			<div className={`${styles.resizeNe} ${styles.resizer}`} ref={resizeNeRef} />

@@ -8,7 +8,7 @@ export default function FileContext({ children }) {
   const [file, setFile] = useState(null);
   const [image, setImage] = useState(null);
   const [selectedBackground, setSelectedBackground] = useState(null);
-  const [positions, setPositions] = useState({});
+  const [positions, setPositions] = useState({ x: 0, y: 0 });
   const boxRef = useRef(null);
   const resizeSeRef = useRef(null);
   const resizeNeRef = useRef(null);
