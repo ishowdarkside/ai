@@ -4,37 +4,31 @@ import Draggable from "./PromptComponents/Draggable";
 import ImageSizing from "./PromptComponents/ImageSizing";
 import { handleCompose } from "../../../services/handleCompose";
 import { useGeneratorContext } from "../../../context/GeneratorContext";
+import { useRef } from "react";
 
 export default function Prompt() {
-  const {
-    setFile,
-    boxRef,
-    positions: { x, y },
-    file,
-    selectedBackground,
-  } = useFileContext();
+  const { setFile, positions, file, selectedBackground, productSize } =
+    useFileContext();
 
-  const { backgroundByte, selectedSize, setResizedImage, resizedImage } =
-    useGeneratorContext();
+  const { selectedSize, setResizedImage } = useGeneratorContext();
+  const containerRef = useRef(null);
 
-  console.log(x, y);
   return (
-    <div className={styles.promptWrapper}>
+    <div className={styles.promptWrapper} ref={containerRef}>
       <button onClick={() => setFile(null)} className={styles.chooseFile}>
         Choose product
       </button>
-      <Draggable />
+      <Draggable containerRef={containerRef} />
       <ImageSizing />
       <button
         className={styles.generateBtn}
         onClick={async () => {
           const res = await handleCompose(
-            boxRef,
+            productSize,
             file,
             selectedBackground,
             selectedSize,
-            x,
-            y
+            positions
           );
           setResizedImage(res);
         }}

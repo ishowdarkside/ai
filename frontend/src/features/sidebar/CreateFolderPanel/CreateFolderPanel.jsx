@@ -21,7 +21,6 @@ export default function CreateFolderPanel({ onClosePanel }) {
     formData.append("folderName", folderName);
     mutate(formData, {
       onSuccess: (res) => {
-        console.log(res);
         if (res) onClosePanel(false);
       },
       onError: (err) => console.log(err.message),

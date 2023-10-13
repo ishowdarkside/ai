@@ -1,50 +1,83 @@
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import DraggableBox from "../../DraggableBox/DraggableBox";
-import { BsArrowsMove } from "react-icons/bs";
+/* eslint-disable react/prop-types */
 import styles from "../Generator.module.scss";
-import { IoMdResize } from "react-icons/io";
-import { useGeneratorContext } from "../../../../context/GeneratorContext";
 import { useFileContext } from "../../../../context/fileContext";
+import { animated, useSpring } from "@react-spring/web";
+import { useDrag } from "@use-gesture/react";
+import { useRef } from "react";
 
-export default function Draggable() {
-  const { isMoving, setIsMoving } = useGeneratorContext();
-  const { selectedBackground, image } = useFileContext();
+export default function Draggable({ containerRef }) {
+  const dragEl = useRef(null);
+  const { setPositions, setProductSize, image } = useFileContext();
+  const [{ x, y, width, height }, api] = useSpring(() => ({
+    x: 0,
+    y: 0,
+    height: 200,
+    width: 200,
+  }));
+
+  console.log(image);
+  const bind = useDrag(
+    (state) => {
+      const isResizing = state.event.target === dragEl.current;
+      if (isResizing) {
+        //ubaciti novi state u context za width i height i to tamo koristiti kod handlecompose
+        setProductSize({ width: state.offset[0], height: state.offset[1] });
+        api.set({
+          width: state.offset[0],
+          height: state.offset[1],
+        });
+      } else {
+        setPositions({ x: state.offset[0], y: state.offset[1] });
+        api.set({
+          x: state.offset[0],
+          y: state.offset[1],
+        });
+      }
+    },
+    {
+      from: (event) => {
+        const isResizing = event.target === dragEl.current;
+        if (isResizing) {
+          return [width.get(), height.get()];
+        } else {
+          return [x.get(), y.get()];
+        }
+      },
+      bounds: (state) => {
+        const isResizing = state.event.target === dragEl.current;
+        const containerWidth = containerRef.current.clientWidth ?? 0;
+        const containerHeight = containerRef.current.clientHeight ?? 0;
+        if (isResizing) {
+          return {
+            top: 50,
+            left: 50,
+            right: containerWidth - x.get(),
+            bottom: containerHeight - y.get(),
+          };
+        } else {
+          return {
+            top: 0,
+            left: 0,
+            right: containerWidth - width.get(),
+            bottom: containerHeight - height.get(),
+          };
+        }
+      },
+    }
+  );
   return (
-    <>
-      <DndProvider backend={HTML5Backend}>
-        <div
-          className={styles.image}
-          style={
-            selectedBackground && {
-              backgroundImage: `url(http://127.0.0.1:3000/${selectedBackground})`,
-            }
-          }
-        >
-          <DraggableBox
-            id="box1"
-            left={50}
-            top={50}
-            image={image}
-            isMoving={isMoving}
-          />
-        </div>
-      </DndProvider>
-
-      <button
-        onClick={() => setIsMoving((curr) => !curr)}
-        className={styles.toggleBtn}
-      >
-        {isMoving ? (
-          <div className={styles.resizeIcon}>
-            <IoMdResize />
-          </div>
-        ) : (
-          <div className={styles.moveIcon}>
-            <BsArrowsMove />
-          </div>
-        )}
-      </button>
-    </>
+    <animated.div
+      style={{
+        x,
+        y,
+        width,
+        height,
+        backgroundImage: `url(${image})`,
+      }}
+      {...bind()}
+      className={styles.box}
+    >
+      <div className={styles.resizeMe} ref={dragEl}></div>
+    </animated.div>
   );
 }

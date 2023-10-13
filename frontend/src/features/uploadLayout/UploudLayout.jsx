@@ -3,8 +3,8 @@ import Generator from "./Generator/Generator";
 import Uploud from "./Uploud/Uploud";
 import styles from "./UploudLayout.module.scss";
 export default function UploudLayout() {
-  const { file, image } = useFileContext();
-  console.log(image);
+  const { file } = useFileContext();
+
   return (
     <div className={styles.uploudLayout}>
       {!file ? <Uploud /> : <Generator />}

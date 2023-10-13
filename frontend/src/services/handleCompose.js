@@ -2,34 +2,29 @@ import mergeImages from "merge-images";
 import { resizeProduct, resizeImage, convertToByte } from "./images";
 
 export async function handleCompose(
-  boxRef,
+  productSize,
   file,
   selectedBackground,
   selectedSize,
-  x,
-  y
+  positions
 ) {
-  const productWidth = boxRef.current.getBoundingClientRect().width;
-  const productHeight = boxRef.current.getBoundingClientRect().height;
-
   const formData = new FormData();
   formData.append("product", file, file.name);
-  formData.append("width", productWidth);
-  formData.append("height", productHeight);
+  formData.append("width", productSize.width);
+  formData.append("height", productSize.height);
   const resizedProduct = await resizeProduct(
     formData,
-    productWidth,
-    productHeight
+    productSize.width,
+    productSize.height
   );
 
-  console.log(selectedBackground);
   //provjerit na backendu da li je ai generated ili je sa servera
   const convertToByteResponse = await convertToByte(selectedBackground);
   const backgroundByte = convertToByteResponse.imageBase64;
 
   const b64 = await mergeImages([
     backgroundByte,
-    { src: resizedProduct, x: x * 2.7, y: y * 2.7 },
+    { src: resizedProduct, x: positions.x * 2.7, y: positions.y * 2.7 },
   ]);
 
   const resizedResponse = await resizeImage(

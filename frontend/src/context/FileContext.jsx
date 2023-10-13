@@ -9,11 +9,7 @@ export default function FileContext({ children }) {
   const [image, setImage] = useState(null);
   const [selectedBackground, setSelectedBackground] = useState(null);
   const [positions, setPositions] = useState({ x: 0, y: 0 });
-  const boxRef = useRef(null);
-  const resizeSeRef = useRef(null);
-  const resizeNeRef = useRef(null);
-  const resizeSwRef = useRef(null);
-  const resizeNwRef = useRef(null);
+  const [productSize, setProductSize] = useState({ width: 200, height: 200 });
   return (
     <context.Provider
       value={{
@@ -25,11 +21,8 @@ export default function FileContext({ children }) {
         setImage,
         selectedBackground,
         setSelectedBackground,
-        boxRef,
-        resizeSeRef,
-        resizeNeRef,
-        resizeSwRef,
-        resizeNwRef
+        productSize,
+        setProductSize,
       }}
     >
       {children}

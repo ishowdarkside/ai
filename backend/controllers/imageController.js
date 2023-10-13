@@ -136,6 +136,8 @@ exports.getProductImages = catchAsync(async (req, res, next) => {
 exports.convertToByte = catchAsync(async (req, res, next) => {
   const { imageUrl } = req.body;
 
+  console.log(imageUrl);
+
   // Fetch the image using Axios
   const axiosUrl = imageUrl.includes("googleapis")
     ? imageUrl
