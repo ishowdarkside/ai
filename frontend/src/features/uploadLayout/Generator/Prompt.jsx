@@ -2,7 +2,8 @@ import { useFileContext } from "../../../context/fileContext";
 import styles from "./Generator.module.scss";
 import Draggable from "./PromptComponents/Draggable";
 import ImageSizing from "./PromptComponents/ImageSizing";
-import { resizeProduct } from "./resizeProduct";
+import { handleCompose } from "../../../services/handleCompose";
+import { useGeneratorContext } from "../../../context/GeneratorContext";
 
 export default function Prompt() {
   const {
@@ -10,8 +11,13 @@ export default function Prompt() {
     boxRef,
     positions: { x, y },
     file,
+    selectedBackground,
   } = useFileContext();
 
+  const { backgroundByte, selectedSize, setResizedImage, resizedImage } =
+    useGeneratorContext();
+
+  console.log(x, y);
   return (
     <div className={styles.promptWrapper}>
       <button onClick={() => setFile(null)} className={styles.chooseFile}>
@@ -21,8 +27,16 @@ export default function Prompt() {
       <ImageSizing />
       <button
         className={styles.generateBtn}
-        onClick={() => {
-          resizeProduct(boxRef, file);
+        onClick={async () => {
+          const res = await handleCompose(
+            boxRef,
+            file,
+            selectedBackground,
+            selectedSize,
+            x,
+            y
+          );
+          setResizedImage(res);
         }}
       >
         Generate

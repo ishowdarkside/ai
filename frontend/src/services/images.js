@@ -120,3 +120,16 @@ export async function saveAiImage(imageUrl) {
     console.log(err);
   }
 }
+
+export async function convertToByte(imageUrl) {
+  const res = await fetch(`${BASE_URL}api/images/convertToByte`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      imageUrl,
+    }),
+  });
+
+  const data = await res.json();
+  return data;
+}

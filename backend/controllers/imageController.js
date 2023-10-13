@@ -62,6 +62,7 @@ exports.getSavedImages = catchAsync(async (req, res, next) => {
 });
 exports.resizeProduct = catchAsync(async (req, res, next) => {
   const { width: productWidth, height: productHeight } = req.body;
+
   const data = await sharp(req.file.buffer)
     .resize({
       width: parseInt(productWidth * 2.5),
@@ -71,18 +72,22 @@ exports.resizeProduct = catchAsync(async (req, res, next) => {
     .toBuffer();
   const resizedImage = data.toString("base64");
 
+  /*
   const options = {
     apiKey: imgBBAPIKey,
     base64string: resizedImage,
+    name: req.file.originalname.split(".")[0],
     expiration: 300,
   };
 
   const uploadResponse = await imgbbUploader(options);
+  //return resizedProduct: uploadResponse.image.url,
+*/
 
   res.status(200).json({
     status: "success",
-    message: "Image saved successfully!",
-    resizedProduct: uploadResponse.image.url,
+    message: "Product resized successfully!",
+    resizedProduct: "data:image/png;base64," + resizedImage,
   });
 });
 
@@ -134,7 +139,7 @@ exports.convertToByte = catchAsync(async (req, res, next) => {
   // Fetch the image using Axios
   const axiosUrl = imageUrl.includes("googleapis")
     ? imageUrl
-    : `${req.protocol}://${req.hostname}/${imageUrl}`;
+    : `${req.protocol}://${req.hostname}:3000/${imageUrl}`;
   //u developmentu dodati port 3000
   const imageResponse = await axios.get(axiosUrl, {
     responseType: "arraybuffer",

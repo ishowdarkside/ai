@@ -5,6 +5,7 @@ dotenv.config({ path: "./config.env" });
 const app = express();
 const folderRoute = require("./Routes/folderRoute");
 const imageRoute = require("./Routes/ImageRoute");
+const aiRoute = require("./Routes/aiRoute");
 const errorMiddleware = require("./controllers/errorController");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -19,6 +20,7 @@ app.use(express.static("public"));
 
 app.use("/api/folders", folderRoute);
 app.use("/api/images", imageRoute);
+app.use("/api/ai", aiRoute);
 app.use("*", (req, res, next) => {
   res.sendFile(path.join(__dirname, "public"));
 });
