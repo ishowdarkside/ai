@@ -25,6 +25,9 @@
 
   .promptWrapper {
     background-image: url("../../../assets/transparent_image_bg.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
     height: 40rem;
     position: relative;
     display: flex;
@@ -316,16 +319,25 @@
 }
 
 .box {
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
   border: 1px solid #5c27d4;
   cursor: grab;
   position: relative;
 }
-.resizeMe {
+
+.resizer {
   position: absolute;
-  bottom: 0;
+  width: 25px;
+  height: 25px;
+  z-index: 2;
   right: 0;
-  width: 20px;
-  cursor: se-resize;
-  height: 20px;
-  background-color: blue;
+}
+.resizeMe {
+  bottom: -1px;
+  right: -1px;
+  cursor: nw-resize;
+  border-bottom: 6px solid rgb(212, 20, 155);
+  border-right: 6px solid rgb(212, 20, 155);
 }

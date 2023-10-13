@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
-import styles from "../Generator.module.scss";
 import { useFileContext } from "../../../../context/fileContext";
 import { animated, useSpring } from "@react-spring/web";
 import { useDrag } from "@use-gesture/react";
 import { useRef } from "react";
+import styles from "../Generator.module.scss";
 
 export default function Draggable({ containerRef }) {
   const dragEl = useRef(null);
@@ -15,7 +15,6 @@ export default function Draggable({ containerRef }) {
     width: 200,
   }));
 
-  console.log(image);
   const bind = useDrag(
     (state) => {
       const isResizing = state.event.target === dragEl.current;
@@ -77,7 +76,7 @@ export default function Draggable({ containerRef }) {
       {...bind()}
       className={styles.box}
     >
-      <div className={styles.resizeMe} ref={dragEl}></div>
+      <div className={`${styles.resizeMe} ${styles.resizer}`} ref={dragEl}></div>
     </animated.div>
   );
 }

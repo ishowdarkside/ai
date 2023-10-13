@@ -16,6 +16,8 @@ export default function ImageCard({ data, folderId }) {
     // Send data that is edited to backend
   }
 
+  console.log(data)
+
   return (
     <div className={styles.image}>
       <img

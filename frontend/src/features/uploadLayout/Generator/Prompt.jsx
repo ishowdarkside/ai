@@ -14,7 +14,7 @@ export default function Prompt() {
   const containerRef = useRef(null);
 
   return (
-    <div className={styles.promptWrapper} ref={containerRef}>
+    <div className={styles.promptWrapper} style={{ backgroundImage: `url(http://127.0.0.1:3000/${selectedBackground})` }} ref={containerRef}>
       <button onClick={() => setFile(null)} className={styles.chooseFile}>
         Choose product
       </button>
