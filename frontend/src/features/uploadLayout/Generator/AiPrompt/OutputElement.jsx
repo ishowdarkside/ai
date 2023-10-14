@@ -12,7 +12,7 @@ export default function OutputElement({ image }) {
       onClick={async () => {
         setSelectedBackground(image.tmp_url);
       }}
-      style={{ backgroundImage: `url(${image.tmp_url})` }}
+      style={{ backgroundImage: `url(${image})` }}
     >
       {!isSaved && (
         <button

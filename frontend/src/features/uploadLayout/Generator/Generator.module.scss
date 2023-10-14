@@ -26,7 +26,7 @@
   .promptWrapper {
     background-image: url("../../../assets/transparent_image_bg.jpg");
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     height: 40rem;
     position: relative;
@@ -325,6 +325,7 @@
   border: 1px solid #5c27d4;
   cursor: grab;
   position: relative;
+  touch-action: none;
 }
 
 .resizer {
